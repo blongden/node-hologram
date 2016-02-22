@@ -1,0 +1,23 @@
+{
+  "name": "node-hologram",
+  "version": "0.0.1",
+  "description": "A node clone of [Hologram](https://github.com/trulia/hologram)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BrianDGLS",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BrianDGLS/node-hologram.git"
+  },
+  "keywords": [
+    "node",
+    "hologram"
+  ],
+  "bugs": {
+    "url": "https://github.com/BrianDGLS/node-hologram/issues"
+  },
+  "homepage": "https://github.com/BrianDGLS/node-hologram#readme"
+}
