@@ -4,15 +4,14 @@ A node clone of [Hologram](https://github.com/trulia/hologram)
 
 ### Usage
 
-    `npm install --save-dev node-hologram`
+    npm install --save-dev node-hologram
 
 Then require in your script file:
 
-    `require('hologram')(options)`
+    require('hologram')(options)
 
 ### Options
 
-    ```
     {
         /* root directory */
         root: __dirname,
@@ -37,4 +36,3 @@ Then require in your script file:
         }
     }
 
-    ```
