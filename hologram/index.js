@@ -47,7 +47,7 @@ class Hologram {
     }
 
     generate() {
-        const layout = fs.readFileSync('./templates/layout.html', 'utf8');
+        const layout = fs.readFileSync(`${__dirname}/views/layout.html`, 'utf8');
         const template = handlebars.compile(layout);
         const data = this.data;
 
