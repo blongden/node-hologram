@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/BrianDGLS/node-hologram/issues"
   },
-  "homepage": "https://github.com/BrianDGLS/node-hologram#readme"
+  "homepage": "https://github.com/BrianDGLS/node-hologram#readme",
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "marked": "^0.3.5"
+  }
 }

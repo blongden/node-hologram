@@ -6,14 +6,13 @@ const handlebars = require('handlebars');
 
 class Hologram {
     constructor(options) {
-        this.root = options.root;
         this.dest = options.dest;
+        this.colors = options.colors || false;
         this.styles = options.styles || false;
         this.scripts = options.scripts || false;
 
         this.regex = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//;
         this.data = {};
-
         this.init();
     }
 
@@ -53,6 +52,10 @@ class Hologram {
 
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
+                if (this.colors && key === 'styles') {
+                    data[key].colors = this.colors;
+                }
+
                 fs.writeFileSync(
                     `${this.dest}/${key}.html`,
                     template(data[key]),
@@ -63,8 +66,8 @@ class Hologram {
     }
 
     init() {
-        this.styles ? this.getData(this.styles.paths.dir, 'styles') : false;
-        this.scripts ? this.getData(this.scripts.paths.dir, 'scripts') : false;
+        this.styles ? this.getData(this.styles.dir, 'styles') : false;
+        this.scripts ? this.getData(this.scripts.dir, 'scripts') : false;
 
         this.generate();
     }
