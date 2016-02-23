@@ -7,13 +7,13 @@ const handlebars = require('handlebars');
 class Hologram {
     constructor(options) {
         this.dest = options.dest;
+        this.ext = options.ext || 'scss';
         this.colors = options.colors || false;
         this.styles = options.styles || false;
         this.scripts = options.scripts || false;
 
         this.regex = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//;
         this.data = {};
-        this.init();
     }
 
     getData(dir, type) {
@@ -25,24 +25,27 @@ class Hologram {
             fs
             .readdirSync(styleDirectory)
             .map(x => {
-                if (x.split('.')[1] === 'scss') {
-                    return _this.data[type].items
-                        .push({
-                            name: x.split('.')[0],
-                            content: _this.convertMarkdown(
-                                fs.readFileSync(`${styleDirectory}/${x}`, 'utf8')
-                                .match(_this.regex)[0]
-                                .replace(/([\/\*][*\*\/])/g, '')
-                            )
-                        });
+                if (x.split('.')[1] === this.ext) {
+                    let content = fs
+                        .readFileSync(`${styleDirectory}/${x}`, 'utf8')
+                        .match(_this.regex)[0]
+                        .split('\n');
+
+                    if (content[0].match(/doc/)) {
+                        content[0] = '';
+                        return _this.data[type].items
+                            .push({
+                                name: x.split('.')[0],
+                                content: marked(
+                                    content
+                                    .join('')
+                                    .replace(/([\/\*][*\*\/])/g, ''))
+                            });
+                    }
                 }
             }));
 
         this.data[type];
-    }
-
-    convertMarkdown(md) {
-        return marked(md);
     }
 
     generate() {
