@@ -2,93 +2,104 @@
 
 A node clone of [Hologram](https://github.com/trulia/hologram)
 
+Allows for the easy generation of styleguides from markdown documentation.
+
 ### Usage
 
-    npm install --save-dev node-hologram
+```
+npm install --save-dev node-hologram
+```
 
 Then require in your script file:
 
-    const hologram = require('node-hologram')(options);
-    hologram.init();
+```javascript
+const hologram = require('node-hologram')(options);
+hologram.init();
+```
 
 ### Options
 
-__root__
-
-*required*
+__root__ `required`
 
 The root of your project. All paths provided will be relevant to this.
 
-    root: __dirname
+```javascript
+root: __dirname
+```
 
-__dest__
+__dest__ `required`
 
-*required*
-
-    dest: `/path/to/dest`
+```javascript
+dest: `/path/to/dest`
+```
 
 The path to the folder where Hologram's styleguide will be placed
 
-__styles__
-
-*required*
+__styles__ `required`
 
 Information on which folders your stylesheets are contained in, as well the path to the compiled stylesheet
 
-    styles: {
-        dir: ['path/to/dir', 'path/to/other'],
-        main: '/path/to/mycompiledcss.css'
-    }
+```javascript
+styles: {
+    dir: ['path/to/dir', 'path/to/other'],
+    main: '/path/to/mycompiledcss.css'
+}
+```
 
-__ext__
-
-*optional*
+__ext__ `optional`
 
 The file extensions which will be used by Hologram, defaults to *scss* and *js*
 
-    ext: ['scss', 'js']
+```javascript
+ext: ['scss', 'js']
+```
 
-__title__
-
-*optional*
+__title__ `optional`
 
 The title of your styleguide
 
-    title: 'My awesome app'
+```javascript
+title: 'My awesome app'
+```
 
-__colors__
+__colors__ `optional`
 
-*optional*
+The styleguides color pallette, will be displayed in styles list
 
-The styleguides color pallette
+```javascript
+colors: {
+    red: '#f00',
+    green: '#0f0',
+    blur: '#00f'
+}
+```
 
-    colors: {
-        red: '#f00',
-        green: '#0f0',
-        blut: '#00f'
-    }
-
-__scripts__
-
-*optional*
+__scripts__ `optional`
 
 Information on which folders your scripts are contained in, as well as the path to the bundle script file
 
-    scripts: {
-        dir: ['/path/to/dir', '/path/to/other'],
-        main: '/path/to/myscript.js'
-    }
+```javascript
+scripts: {
+    dir: ['/path/to/dir', '/path/to/other'],
+    main: '/path/to/myscript.js'
+}
+```
 
-__customStylesheet__
-
-*optional*
+__customStylesheet__ `optional`
 
 Add a custom stylesheet to the style guide
 
-    customStylesheet: '/path/to/customStylesheet.css'
+```javascript
+customStylesheet: '/path/to/customStylesheet.css'
+```
 
-##Example of everything out together
+##Examples
 
+__Gulp__
+
+```javascript
+
+const options = {
     root: __dirname,
     ext: ['scss', 'js'],
     dest: `/path/to/dest`,
@@ -107,3 +118,10 @@ Add a custom stylesheet to the style guide
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/myscript.js'
     }
+};
+
+const hologram = require('node-hologram')(options);
+
+gulp.task('hologram', () => hologram.init());
+
+```
