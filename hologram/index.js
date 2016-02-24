@@ -1,13 +1,14 @@
 'use strict';
 
 const fs = require('fs');
-const marked = require('marked')
+const marked = require('marked');
 const handlebars = require('handlebars');
 
 class Hologram {
     constructor(options) {
         this.dest = options.dest;
         this.ext = options.ext || 'scss';
+        this.title = options.title || false;
         this.colors = options.colors || false;
         this.styles = options.styles || false;
         this.scripts = options.scripts || false;
@@ -44,8 +45,6 @@ class Hologram {
                     }
                 }
             }));
-
-        this.data[type];
     }
 
     generate() {
@@ -55,13 +54,25 @@ class Hologram {
 
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
+                let context = data[key];
+
+                context.stylesheet = this.styles.main;
+
+                if(this.scripts) {
+                    context.script = this.scripts.main;
+                }
+
+                if (this.title) {
+                    context.title = this.title;
+                }
+
                 if (this.colors && key === 'styles') {
-                    data[key].colors = this.colors;
+                    context.colors = this.colors;
                 }
 
                 fs.writeFileSync(
-                    `${this.dest}/${key}.html`,
-                    template(data[key]),
+                    `${this.dest}/${key === 'styles' ? 'index' : key}.html`,
+                    template(context),
                     'utf8'
                 );
             }
@@ -69,8 +80,13 @@ class Hologram {
     }
 
     init() {
-        this.styles ? this.getData(this.styles.dir, 'styles') : false;
-        this.scripts ? this.getData(this.scripts.dir, 'scripts') : false;
+        if (this.styles) {
+            this.getData(this.styles.dir, 'styles');
+        }
+
+        if (this.scripts) {
+            this.getData(this.scripts.dir, 'scripts');
+        }
 
         this.generate();
     }

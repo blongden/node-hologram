@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Gulp Hologram - Gulpogram</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {{#if title}}{{title}} | {{/if}}Hologram
+        </title>
+        <link rel="stylesheet" type="text/css" href="{{stylesheet}}">
+    </head>
 
-<body>
-    <div class="row">
-        <div class="col-sm-2">
-            <ul class="nav nav-pills nav-stacked">
+    <body>
+        <div>
+            <div>
+                <ul>
+                    {{#each items}}
+                        <li><a href="#{{this.name}}">{{this.name}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div>
+                {{#if colors}}
+                    <div>
+                        {{#each colors}}
+                            <div style="background: {{this}}">
+                                {{@key}}
+                            </div>
+                        {{/each}}
+                    </div>
+                {{/if}}
                 {{#each items}}
-                <li class="list-item"><a href="#{{this.name}}">{{this.name}}</a></li>
-                {{/each}}
-            </ul>
-        </div>
-
-        <div class="col-sm-8">
-            {{#if colors}}
-            <div class="color-pallette">
-                {{#each colors}}
-                <div class="color-pallette__swatch" style="background: {{this}}">
-                    {{@key}}
-                </div>
+                    <div id="{{this.name}}">
+                        <h2>{{this.name}}</h2> {{{this.content}}}
+                    </div>
                 {{/each}}
             </div>
-            {{/if}}
-
-            {{#each items}}
-            <div class="item" id="{{this.name}}">
-                <h2>{{this.name}}</h2>
-                {{{this.content}}}
-            </div>
-            {{/each}}
         </div>
-    </div>
-</body>
+        {{#if script}}
+            <script type="text/javascript" src="{{script}}"></script>
+        {{/if}}
+    </body>
 
 </html>
