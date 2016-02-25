@@ -1,18 +1,95 @@
 /* Hologram body tag */
-.hologram {}
+
+.hologram {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0 10px;
+}
+
 
 /* Hologram's Side Nav */
-.hologram-sideNav {}
-.hologram-sideNav__list {}
+
+.hologram-sideNav {
+    flex: 20%;
+    position: relative;
+}
+
+.hologram-sideNav__list {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    position: fixed;
+    top: 0;
+}
+
 .hologram-sideNav__list-item {}
-.hologram-sideNav__list-link {}
-.hologram-sideNav__list-title {}
+
+.hologram-sideNav__list-link {
+    color: #4078c0;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0;
+    text-transform: capitalize;
+}
+
+.hologram-sideNav__list-link:hover {}
+
+.hologram-sideNav__list-title {
+    padding-bottom: 0.3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+    font-size: 21px;
+    line-height: 1.1;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 
 /* Hologram's main list */
-.hologram-styleguide {}
+
+.hologram-styleguide {
+    flex: 80%;
+}
+
 .hologram-styleguide__section {}
+
 .hologram-styleguide__section-title {}
-.hologram-styleguide__color-pallette {}
+
+.hologram-styleguide__color-pallette {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.hologram-styleguide__color-pallette-item {
+    border: 1px solid #eee;
+    flex: 1 auto;
+    width: 200px;
+}
+
+.hologram-styleguide__color-pallette-item-swatch {
+    height: 100px;
+}
+
+.hologram-styleguide__color-pallette-item-text {
+    text-transform: uppercase;
+}
+
 .hologram-styleguide__item {}
+
 .hologram-styleguide__item-title {}
-.hologram-styleguide__item-content {}
+
+.hologram-styleguide__item-content {
+    padding: 20px 0;
+}

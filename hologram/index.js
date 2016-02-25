@@ -5,6 +5,17 @@ const mkdirp = require('mkdirp');
 const marked = require('marked');
 const handlebars = require('handlebars');
 
+marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false
+});
+
 class Hologram {
     constructor(options) {
         this.reset(options);
@@ -74,6 +85,7 @@ class Hologram {
     }
 
     generate() {
+        let styles = '';
         const _this = this;
         const data = this.data;
         const dest = `${this.root + this.dest}/hologram`;
@@ -94,9 +106,12 @@ class Hologram {
             }
 
             if (!_this.customStylesheet) {
+                styles += fs.readFileSync(`${__dirname}/styles/github.css`, 'utf8');
+                styles += fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
+
                 fs.writeFileSync(
                     `${dest}/hologram.css`,
-                    fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8'),
+                    styles,
                     'utf8'
                 );
             }

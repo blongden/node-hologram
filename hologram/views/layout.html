@@ -19,7 +19,7 @@
                     </li>
                     {{#each styles}}
                         <li class="hologram-sideNav__list-item">
-                            <a class="hologram-sideNav__link" href="#{{this.name}}">{{this.name}}</a>
+                            <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
                         </li>
                     {{/each}}
                 {{/if}}
@@ -29,7 +29,7 @@
                     </li>
                     {{#each scripts}}
                         <li class="hologram-sideNav__list-item">
-                            <a class="hologram-sideNav__link" href="#{{this.name}}">{{this.name}}</a>
+                            <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
                         </li>
                     {{/each}}
                 {{/if}}
@@ -38,31 +38,34 @@
         <div class="hologram-styleguide">
             {{#if colors}}
                 <div class="hologram-styleguide__section">
-                    {{#each colors}}
-                        <div class="hologram-styleguide__color-pallette" style="background: {{this}}">
-                            {{@key}}: {{this}}
-                        </div>
-                    {{/each}}
+                    <div class="hologram-styleguide__color-pallette">
+                        {{#each colors}}
+                            <div class="hologram-styleguide__color-pallette-item">
+                                <div class="hologram-styleguide__color-pallette-item-swatch" style="background: {{this}}"></div>
+                                <p class="hologram-styleguide__color-pallette-item-text">{{@key}}: {{this}}</p>
+                            </div>
+                        {{/each}}
+                    </div>
                 </div>
             {{/if}}
             {{#if styles}}
                 <div class="hologram-styleguide__section">
-                    <h2 class="hologram-styleguide__section-title">Styles</h2>
+                    <!-- <h2 class="hologram-styleguide__section-title">Styles</h2> -->
                     {{#each styles}}
                         <div class="hologram-styleguide__item" id="{{this.name}}">
-                            <h2 class="hologram-styleguide__item-title">{{this.name}}</h2>
-                            <div class="hologram-styleguide__item-content">{{{this.content}}}</div>
+                            <!-- <h2 class="hologram-styleguide__item-title">{{this.name}}</h2> -->
+                            <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
                         </div>
                     {{/each}}
                 </div>
             {{/if}}
             {{#if scripts}}
                 <div class="hologram-styleguide__section">
-                    <h2 class="hologram-styleguide__section-title">Scripts</h2>
+                    <!-- <h2 class="hologram-styleguide__section-title">Scripts</h2> -->
                     {{#each scripts}}
                         <div class="hologram-styleguide__item" id="{{this.name}}">
-                            <h2 class="hologram-styleguide__item-title">{{this.name}}</h2>
-                            <div class="hologram-styleguide__item-content">{{{this.content}}}</div>
+                            <!-- <h2 class="hologram-styleguide__item-title">{{this.name}}</h2> -->
+                            <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
                         </div>
                     {{/each}}
                 </div>
