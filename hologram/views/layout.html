@@ -6,34 +6,67 @@
         <title>
             {{#if title}}{{title}} | {{/if}}Hologram
         </title>
+        <link rel="stylesheet" type="text/css" href="{{hologramStylesheet}}">
         <link rel="stylesheet" type="text/css" href="{{stylesheet}}">
     </head>
 
-    <body>
-        <div>
-            <div>
-                <ul>
-                    {{#each items}}
-                        <li><a href="#{{this.name}}">{{this.name}}</a></li>
+    <body class="hologram">
+        <div class="hologram-sideNav">
+            <ul class="hologram-sideNav__list">
+                {{#if styles}}
+                    <li class="hologram-sideNav__list-item">
+                        <h2 class="hologram-sideNav__list-title">Styles</h2>
+                    </li>
+                    {{#each styles}}
+                        <li class="hologram-sideNav__list-item">
+                            <a class="hologram-sideNav__link" href="#{{this.name}}">{{this.name}}</a>
+                        </li>
                     {{/each}}
-                </ul>
-            </div>
-            <div>
-                {{#if colors}}
-                    <div>
-                        {{#each colors}}
-                            <div style="background: {{this}}">
-                                {{@key}}
-                            </div>
-                        {{/each}}
-                    </div>
                 {{/if}}
-                {{#each items}}
-                    <div id="{{this.name}}">
-                        <h2>{{this.name}}</h2> {{{this.content}}}
-                    </div>
-                {{/each}}
-            </div>
+                {{#if scripts}}
+                    <li class="hologram-sideNav__list-item">
+                        <h2 class="hologram-sideNav__list-title">Scripts</h2>
+                    </li>
+                    {{#each scripts}}
+                        <li class="hologram-sideNav__list-item">
+                            <a class="hologram-sideNav__link" href="#{{this.name}}">{{this.name}}</a>
+                        </li>
+                    {{/each}}
+                {{/if}}
+            </ul>
+        </div>
+        <div class="hologram-styleguide">
+            {{#if colors}}
+                <div class="hologram-styleguide__section">
+                    {{#each colors}}
+                        <div class="hologram-styleguide__color-pallette" style="background: {{this}}">
+                            {{@key}}: {{this}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+            {{#if styles}}
+                <div class="hologram-styleguide__section">
+                    <h2 class="hologram-styleguide__section-title">Styles</h2>
+                    {{#each styles}}
+                        <div class="hologram-styleguide__item" id="{{this.name}}">
+                            <h2 class="hologram-styleguide__item-title">{{this.name}}</h2>
+                            <div class="hologram-styleguide__item-content">{{{this.content}}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
+            {{#if scripts}}
+                <div class="hologram-styleguide__section">
+                    <h2 class="hologram-styleguide__section-title">Scripts</h2>
+                    {{#each scripts}}
+                        <div class="hologram-styleguide__item" id="{{this.name}}">
+                            <h2 class="hologram-styleguide__item-title">{{this.name}}</h2>
+                            <div class="hologram-styleguide__item-content">{{{this.content}}}</div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{/if}}
         </div>
         {{#if script}}
             <script type="text/javascript" src="{{script}}"></script>

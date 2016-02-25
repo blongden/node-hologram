@@ -51,7 +51,10 @@ __ext__ `optional`
 The file extensions which will be used by Hologram, defaults to *scss* and *js*
 
 ```javascript
-ext: ['scss', 'js']
+ext: {
+    styles: 'scss', 
+    scripts: 'js'
+}
 ```
 
 __title__ `optional`
@@ -101,10 +104,13 @@ __Gulp__
 
 const options = {
     root: __dirname,
-    ext: ['scss', 'js'],
+    ext: {
+        styles: 'scss', 
+        scripts: 'js'
+    },
     dest: `/path/to/dest`,
     title: 'My awesome app',
-    customStylesheet: '/path/to/customStylesheet.css'
+    customStylesheet: '/path/to/customStylesheet.css',
     colors: {
         red: '#f00',
         green: '#0f0',
