@@ -1,6 +1,6 @@
 {
   "name": "node-hologram",
-  "version": "0.1.0-pre",
+  "version": "0.1.1-pre",
   "description": "A node clone of [Hologram](https://github.com/trulia/hologram)",
   "main": "index.js",
   "scripts": {
