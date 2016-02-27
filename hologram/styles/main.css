@@ -46,7 +46,7 @@
   padding: 0.5rem 0 0.3rem;
   font-size: 1.75rem;
   line-height: 1.225;
-  border-bottom: 2px solid #4078c0;
+  border-bottom: 2px solid #eee;
 }
 @media (min-width: 768px) {
   .hologram-styleguide {
@@ -57,12 +57,12 @@
   padding-bottom: 0.3rem;
   font-size: 1.75rem;
   line-height: 1.225;
-  border-bottom: 2px solid #4078c0;
+  border-bottom: 2px solid #eee;
 }
 .hologram-styleguide__section-title {
   font-size: 1.75rem;
   line-height: 1.225;
-  border-bottom: 2px solid #4078c0;
+  border-bottom: 2px solid #eee;
 }
 .hologram-styleguide__color-pallette {
   display: flex;
