@@ -82,7 +82,7 @@ as well the path to the compiled stylesheet (`main`).
 
 ```javascript
 styles: {
-    dir: ['path/to/dir', 'path/to/other'],
+    dir: ['/path/to/dir', '/path/to/other'],
     main: '/path/to/mycompiledcss.css'
 }
 ```
@@ -169,7 +169,7 @@ const options = {
         blut: '#00f'
     },
     styles: {
-        dir: ['path/to/dir', 'path/to/other'],
+        dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/mycompiledcss.css'
     },
     scripts: {
