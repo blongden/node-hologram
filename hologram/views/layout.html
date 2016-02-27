@@ -3,31 +3,76 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Gulp Hologram - Gulpogram</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+    <title>
+        {{#if title}}{{title}} | {{/if}}Hologram
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{hologramStylesheet}}">
+    <link rel="stylesheet" type="text/css" href="{{stylesheet}}">
 </head>
 
-<body>
-    <div class="row">
-        <div class="col-sm-2">
-            <ul class="nav nav-pills nav-stacked">
-                {{#each items}}
-                <li class="list-item"><a href="#{{this.name}}">{{this.name}}</a>
-                </li>
-                {{/each}}
-            </ul>
-        </div>
-
-        <div class="col-sm-8">
-            {{#each items}}
-            <div class="item" id="{{this.name}}">
-                <h2>{{this.name}}</h2>
-                {{{this.content}}}
+<body class="hologram">
+<div class="hologram-sideNav">
+    <ul class="hologram-sideNav__list">
+        {{#if styles}}
+        <li class="hologram-sideNav__list-item">
+            <h2 class="hologram-sideNav__list-title">Styles</h2>
+        </li>
+        {{#each styles}}
+        <li class="hologram-sideNav__list-item">
+            <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
+        </li>
+        {{/each}}
+        {{/if}}
+        {{#if scripts}}
+        <li class="hologram-sideNav__list-item">
+            <h2 class="hologram-sideNav__list-title">Scripts</h2>
+        </li>
+        {{#each scripts}}
+        <li class="hologram-sideNav__list-item">
+            <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
+        </li>
+        {{/each}}
+        {{/if}}
+    </ul>
+</div>
+<div class="hologram-styleguide">
+    <h2 class="hologram-styleguide__title">{{title}}</h2>
+    {{#if colors}}
+    <div class="hologram-styleguide__section">
+        <div class="hologram-styleguide__color-pallette">
+            {{#each colors}}
+            <div class="hologram-styleguide__color-pallette-item">
+                <div class="hologram-styleguide__color-pallette-item-swatch" style="background: {{this}}"></div>
+                <p class="hologram-styleguide__color-pallette-item-text">{{@key}}: {{this}}</p>
             </div>
             {{/each}}
         </div>
     </div>
+    {{/if}}
+    {{#if styles}}
+    <div class="hologram-styleguide__section">
+         <h2 class="hologram-styleguide__section-title">Styles</h2>
+        {{#each styles}}
+        <div class="hologram-styleguide__item" id="{{this.name}}">
+            <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{#if scripts}}
+    <div class="hologram-styleguide__section">
+         <h2 class="hologram-styleguide__section-title">Scripts</h2>
+        {{#each scripts}}
+        <div class="hologram-styleguide__item" id="{{this.name}}">
+            <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>
+{{#if script}}
+<script type="text/javascript" src="{{script}}"></script>
+{{/if}}
 </body>
 
 </html>

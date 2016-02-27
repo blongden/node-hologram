@@ -1,6 +1,6 @@
 {
   "name": "node-hologram",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A node clone of [Hologram](https://github.com/trulia/hologram)",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/BrianDGLS/node-hologram/issues"
   },
-  "homepage": "https://github.com/BrianDGLS/node-hologram#readme"
+  "homepage": "https://github.com/BrianDGLS/node-hologram#readme",
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "marked": "^0.3.5",
+    "mkdirp": "^0.5.1"
+  }
 }
