@@ -27,9 +27,9 @@ class Hologram {
         this.styles = options.styles || false;
 
         this.ext = options.ext || {
-            styles: 'scss',
-            scripts: 'js'
-        };
+                styles: 'scss',
+                scripts: 'js'
+            };
         this.title = options.title || false;
         this.colors = options.colors || false;
         this.scripts = options.scripts || false;
@@ -68,7 +68,7 @@ class Hologram {
                     content = fs
                         .readFileSync(`${root + currentDir}/${file}`, 'utf8')
                         .match(_this.regex)[0]
-                        .replace(/([\/\*][*\*\/])/g, '')
+                        .replace(/([\/\*][*\/])/g, '')
                         .split('\n');
 
                     if (content[0].match(/doc/)) {
@@ -85,7 +85,6 @@ class Hologram {
     }
 
     generate() {
-        let styles = '';
         const _this = this;
         const data = this.data;
         const dest = `${this.root + this.dest}/hologram`;
@@ -100,18 +99,15 @@ class Hologram {
             data.colors = this.colors;
         }
 
-        mkdirp(dest, function(err) {
+        mkdirp(dest, function (err) {
             if (err) {
                 console.error(err);
             }
 
             if (!_this.customStylesheet) {
-                styles += fs.readFileSync(`${__dirname}/styles/github.css`, 'utf8');
-                styles += fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
-
                 fs.writeFileSync(
                     `${dest}/hologram.css`,
-                    styles,
+                    fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8'),
                     'utf8'
                 );
             }
