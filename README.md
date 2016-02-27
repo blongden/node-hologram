@@ -54,7 +54,7 @@ __NB__:
  - Only the first correctly formatted comment will be used. Eg: One doc per file.
 
 
-### Options
+## Options
 
 __root__ `required`
 
@@ -77,7 +77,7 @@ __styles__ `required`
 
 Information on which folders your stylesheets are contained in (`dir`).
 Hologram will scan these folders looking for files with the correct
-extension (`scss` by default, can be changed using `ext` option).
+extension (`scss` by default, can be changed using `ext` option),
 as well the path to the compiled stylesheet (`main`).
 
 ```javascript
@@ -124,7 +124,7 @@ __scripts__ `optional`
 
 Information on which folders your scripts are contained in (`dir`).
 Hologram will scan these folders looking for files with the correct
-extension (`js` by default, can be changed using `ext` option).
+extension (`js` by default, can be changed using `ext` option),
 as well the path to the compiled script file (`main`).
 
 ```javascript
