@@ -7,7 +7,6 @@
         {{#if title}}{{title}} | {{/if}}Hologram
     </title>
     <link rel="stylesheet" type="text/css" href="{{hologramStylesheet}}">
-    <link rel="stylesheet" type="text/css" href="{{stylesheet}}">
 </head>
 
 <body class="hologram">
@@ -51,28 +50,31 @@
     {{/if}}
     {{#if styles}}
     <div class="hologram-styleguide__section">
-         <h2 class="hologram-styleguide__section-title">Styles</h2>
+        <h2 class="hologram-styleguide__section-title">Styles</h2>
         {{#each styles}}
         <div class="hologram-styleguide__item" id="{{this.name}}">
             <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
+            {{#if this.example}}
+            <iframe src="./examples/{{this.name}}.html"></iframe>
+            {{/if}}
         </div>
         {{/each}}
     </div>
     {{/if}}
     {{#if scripts}}
     <div class="hologram-styleguide__section">
-         <h2 class="hologram-styleguide__section-title">Scripts</h2>
+        <h2 class="hologram-styleguide__section-title">Scripts</h2>
         {{#each scripts}}
         <div class="hologram-styleguide__item" id="{{this.name}}">
             <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
+            {{#if this.example}}
+            <iframe src="./examples/{{this.name}}.html"></iframe>
+            {{/if}}
         </div>
         {{/each}}
     </div>
     {{/if}}
 </div>
-{{#if script}}
-<script type="text/javascript" src="{{script}}"></script>
-{{/if}}
 </body>
 
 </html>
