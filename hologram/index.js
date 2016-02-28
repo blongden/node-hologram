@@ -11,7 +11,7 @@ marked.setOptions({
     tables: true,
     breaks: false,
     pedantic: false,
-    sanitize: true,
+    sanitize: false,
     smartLists: true,
     smartypants: false
 });
@@ -56,7 +56,7 @@ class Hologram {
     }
 
     getData(dir, type) {
-        let content;
+        let content, name;
         const _this = this;
         const root = this.root;
         const data = this.data[type] = [];
@@ -67,18 +67,28 @@ class Hologram {
                 if (file.split('.')[1] === this.ext[type]) {
                     content = fs
                         .readFileSync(`${root + currentDir}/${file}`, 'utf8')
-                        .match(_this.regex)[0]
-                        .replace(/([\/\*][*\/])/g, '')
-                        .split('\n');
+                        .match(_this.regex);
 
-                    if (content[0].match(/doc/)) {
-                        content.splice(0, 1);
+                    if (content) {
+                        content = content[0]
+                            .replace(/([\/\*][*\/])/g, '')
+                            .split('\n');
 
-                        data
-                            .push({
-                                name: file.split('.')[0],
-                                content: marked(content.join('\n'))
-                            });
+                        if (content[0].match(/doc/)) {
+                            content.splice(0, 1);
+
+                            name = file.split('.')[0];
+
+                            if (name.charAt(0) === '_') {
+                                name = name.substring(1);
+                            }
+
+                            data
+                                .push({
+                                    name: name,
+                                    content: marked(content.join('\n'))
+                                });
+                        }
                     }
                 }
             }));
