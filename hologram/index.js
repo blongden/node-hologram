@@ -11,7 +11,7 @@ marked.setOptions({
     tables: true,
     breaks: false,
     pedantic: false,
-    sanitize: true,
+    sanitize: false,
     smartLists: true,
     smartypants: false
 });
@@ -35,7 +35,14 @@ class Hologram {
         this.scripts = options.scripts || false;
         this.customStylesheet = options.customStylesheet || false;
 
-        this.regex = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//;
+        this.regex = {
+            main: /\/\*[^*]*\*+([^/*][^*]*\*+)*\//,
+            example: /<example>[^*]+([^*]+)<\/example>/
+        };
+
+        this.iframeTemplate = name =>
+            `<iframe class='hologram-styleguide__item-example' src='./examples/${name}.html' frameborder='0' scrolling='no' onload='resizeIframe(this)'></iframe>`;
+
         this.data = {};
     }
 
@@ -55,8 +62,19 @@ class Hologram {
         data.stylesheet = this.styles.main;
     }
 
+    getExample(example) {
+        let temp;
+        if (example) {
+            temp = example[0].split('\n');
+            temp.splice(0, 1);
+            temp.pop();
+
+            return temp.join('').trim();
+        }
+    }
+
     getData(dir, type) {
-        let content;
+        let content, name, example;
         const _this = this;
         const root = this.root;
         const data = this.data[type] = [];
@@ -67,29 +85,83 @@ class Hologram {
                 if (file.split('.')[1] === this.ext[type]) {
                     content = fs
                         .readFileSync(`${root + currentDir}/${file}`, 'utf8')
-                        .match(_this.regex)[0]
-                        .replace(/([\/\*][*\/])/g, '')
-                        .split('\n');
+                        .match(_this.regex.main);
 
-                    if (content[0].match(/doc/)) {
-                        content.splice(0, 1);
+                    if (content) {
+                        content = content[0]
+                            .replace(/([\/\*][*\/])/g, '')
+                            .split('\n');
 
-                        data
-                            .push({
-                                name: file.split('.')[0],
-                                content: marked(content.join('\n'))
-                            });
+                        if (content[0].match(/doc/)) {
+                            content.splice(0, 1);
+
+                            name = file.split('.')[0];
+
+                            if (name.charAt(0) === '_') {
+                                name = name.substring(1);
+                            }
+
+                            example = _this
+                                .getExample(
+                                    content
+                                        .join('\n')
+                                        .match(_this.regex.example)
+                                );
+
+                            data
+                                .push({
+                                    name: name,
+                                    content: marked(content
+                                        .join('\n')
+                                        .replace(_this.regex.example, _this.iframeTemplate(name))
+                                    ),
+                                    example: example
+                                });
+                        }
                     }
                 }
             }));
     }
 
-    generate() {
+    compileView(context, layout) {
+        return handlebars.compile(layout)(context);
+    }
+
+    generateExamples(type) {
+        const _this = this;
+        const dest = `${this.root + this.dest}/hologram/examples`;
+        const layout = fs.readFileSync(`${__dirname}/views/example.html`, 'utf8');
+
+        this.data[type].map(
+            item => {
+                if (item.example) {
+                    mkdirp(dest, (err) => {
+                            if (err) {
+                                console.error(err);
+                            }
+
+                            fs.writeFileSync(
+                                `${dest}/${item.name}.html`,
+                                _this.compileView({
+                                    title: item.name,
+                                    script: _this.data.script,
+                                    stylesheet: _this.data.stylesheet,
+                                    example: item.example
+                                }, layout),
+                                'utf8'
+                            );
+                        }
+                    );
+                }
+            }
+        );
+    }
+
+    generateStyleguide() {
         const _this = this;
         const data = this.data;
         const dest = `${this.root + this.dest}/hologram`;
         const layout = fs.readFileSync(`${__dirname}/views/layout.html`, 'utf8');
-        const template = handlebars.compile(layout);
 
         if (this.title) {
             data.title = this.title;
@@ -99,7 +171,7 @@ class Hologram {
             data.colors = this.colors;
         }
 
-        mkdirp(dest, function (err) {
+        mkdirp(dest, (err) => {
             if (err) {
                 console.error(err);
             }
@@ -114,9 +186,17 @@ class Hologram {
 
             fs.writeFileSync(
                 `${dest}/index.html`,
-                template(data),
+                _this.compileView(data, layout),
                 'utf8'
             );
+
+            if (_this.styles) {
+                _this.generateExamples('styles');
+            }
+
+            if (_this.scripts) {
+                _this.generateExamples('scripts');
+            }
         });
     }
 
@@ -131,7 +211,7 @@ class Hologram {
 
         if (this.styles || this.scripts) {
             this.staticFiles();
-            this.generate();
+            this.generateStyleguide();
         } else {
             console.log('Hologram failed.');
             console.log('Please check you have correctly configured your Hologram options.');

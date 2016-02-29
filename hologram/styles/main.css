@@ -65,13 +65,9 @@
   border-bottom: 2px solid #eee;
 }
 .hologram-styleguide__color-pallette {
-  display: flex;
-  align-content: center;
-  justify-content: center;
   position: relative;
 }
 .hologram-styleguide__color-pallette-item {
-  flex: 1 auto;
   margin-bottom: 1rem;
 }
 .hologram-styleguide__color-pallette-item-swatch {
@@ -80,6 +76,11 @@
 }
 .hologram-styleguide__item {
   padding-bottom: 2rem;
+}
+.hologram-styleguide__item-example {
+  border: 0;
+  display: block;
+  width: 100%;
 }
 .markdown-body hr:after,
 .markdown-body hr:before {
