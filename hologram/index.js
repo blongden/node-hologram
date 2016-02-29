@@ -39,6 +39,10 @@ class Hologram {
             main: /\/\*[^*]*\*+([^/*][^*]*\*+)*\//,
             example: /<example>[^*]+([^*]+)<\/example>/
         };
+
+        this.iframeTemplate = name =>
+            `<iframe class='hologram-styleguide__item-example' src='./examples/${name}.html' frameborder='0' scrolling='no' onload='resizeIframe(this)'></iframe>`;
+
         this.data = {};
     }
 
@@ -109,7 +113,8 @@ class Hologram {
                                     name: name,
                                     content: marked(content
                                         .join('\n')
-                                        .replace(_this.regex.example, '')),
+                                        .replace(_this.regex.example, _this.iframeTemplate(name))
+                                    ),
                                     example: example
                                 });
                         }

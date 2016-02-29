@@ -77,6 +77,11 @@
 .hologram-styleguide__item {
   padding-bottom: 2rem;
 }
+.hologram-styleguide__item-example {
+  border: 0;
+  display: block;
+  width: 100%;
+}
 .markdown-body hr:after,
 .markdown-body hr:before {
   display: table;

@@ -54,9 +54,6 @@
         {{#each styles}}
         <div class="hologram-styleguide__item" id="{{this.name}}">
             <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
-            {{#if this.example}}
-            <iframe src="./examples/{{this.name}}.html"></iframe>
-            {{/if}}
         </div>
         {{/each}}
     </div>
@@ -67,14 +64,16 @@
         {{#each scripts}}
         <div class="hologram-styleguide__item" id="{{this.name}}">
             <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
-            {{#if this.example}}
-            <iframe src="./examples/{{this.name}}.html"></iframe>
-            {{/if}}
         </div>
         {{/each}}
     </div>
     {{/if}}
 </div>
+<script language="javascript" type="text/javascript">
+    function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+</script>
 </body>
 
 </html>

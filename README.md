@@ -36,9 +36,12 @@ _I am some markdown_
 
 Docs for the example component.
 
-Code:
+Put example html inside the <example> tag. This will be extracted and
+placed in an iframe.
 
-<h2>I will be rendered as HTML</h2>
+<example>
+    <h2>I will be rendered as HTML</h2>
+<example>
 
 ```css
 h2 {
@@ -49,9 +52,25 @@ h2 {
 */
 ```
 
+__Components in Docs__
+
+Example components can be placed inside the markdown docs.
+They should be placed inside an `<example>` tag, like so:
+
+```html
+<example>
+    <h2>I will be extracted and placed in an iframe.</h2>
+</example>
+```
+
+The content inside the `example` tag will be extracted and placed in it's own html page.
+It will then be iframed into the styleguide. The reason for this is to prevent styleguide specific
+styles for effecting the example content.
+
 __NB__:
  - If the word `doc` is not present in the first line of the comment that file will be ignored.
  - Only the first correctly formatted comment will be used. Eg: One doc per file.
+ - Only the first `<example>` of each doc will be extracted, Eg: One example per file.
 
 
 ## Options
@@ -82,7 +101,7 @@ as well the path to the compiled stylesheet (`main`).
 
 ```javascript
 styles: {
-    dir: ['path/to/dir', 'path/to/other'],
+    dir: ['/path/to/dir', '/path/to/other'],
     main: '/path/to/mycompiledcss.css'
 }
 ```
@@ -169,7 +188,7 @@ const options = {
         blut: '#00f'
     },
     styles: {
-        dir: ['path/to/dir', 'path/to/other'],
+        dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/mycompiledcss.css'
     },
     scripts: {
