@@ -2,30 +2,7 @@
     This is a template for adding a custom stylesheet to Hologram.
     Every element has a class for stylng, all of which are listed below.
 
-    There is a template for CSS, SCSS, and LESS.
-*/
-
-/* Hologram body tag */
-.hologram {}
-
-/* Hologram's Side Nav */
-.hologram-sideNav {}
-.hologram-sideNav__list {}
-.hologram-sideNav__list-item {}
-.hologram-sideNav__list-link {}
-.hologram-sideNav__list-title {}
-
-/* Hologram's main list */
-.hologram-styleguide {}
-.hologram-styleguide__title {}
-.hologram-styleguide__section {}
-.hologram-styleguide__section-title {}
-.hologram-styleguide__color-pallette {}
-.hologram-styleguide__item {}
-.hologram-styleguide__item-content {}
-
-/*
-    Template for SCSS and LESS.
+    Template for SCSS and LESS:
 
     .hologram {
         &-sideNav {
@@ -45,3 +22,37 @@
     }
 */
 
+
+/* Hologram body tag */
+
+.hologram {}
+
+
+/* Hologram's Side Nav */
+
+.hologram-sideNav {}
+
+.hologram-sideNav__list {}
+
+.hologram-sideNav__list-item {}
+
+.hologram-sideNav__list-link {}
+
+.hologram-sideNav__list-title {}
+
+
+/* Hologram's main list */
+
+.hologram-styleguide {}
+
+.hologram-styleguide__title {}
+
+.hologram-styleguide__section {}
+
+.hologram-styleguide__section-title {}
+
+.hologram-styleguide__color-pallette {}
+
+.hologram-styleguide__item {}
+
+.hologram-styleguide__item-content {}

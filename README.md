@@ -27,7 +27,7 @@ which will then be used to create a styleguide.
 
 __Example Doc__
 
-```
+```html
 /*doc
 
 ## Example

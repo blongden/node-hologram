@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>
-        {{#if title}}{{title}} | {{/if}}Hologram
-    </title>
-    <link rel="stylesheet" type="text/css" href="{{stylesheet}}">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {{#if title}}{{title}} | {{/if}}Hologram
+        </title>
+        <style>{{stylesheet}}</style>
+    </head>
 
-<body>
-
-{{{example}}}
-
-{{#if script}}
-<script type="text/javascript" src="{{script}}"></script>
-{{/if}}
-</body>
+    <body>
+        {{{example}}}
+        {{#if script}}
+            <script type="text/javascript" src="{{script}}"></script>
+        {{/if}}
+    </body>
 
 </html>
