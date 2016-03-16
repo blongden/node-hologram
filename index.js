@@ -1,4 +1,4 @@
 'use strict';
 
 module.exports = options =>
-    require('./hologram')(options);
+    require('./hologram/Main.js')(options);
