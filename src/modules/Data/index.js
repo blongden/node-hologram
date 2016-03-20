@@ -1,5 +1,6 @@
 "use strict";
 var fs = require('fs');
+var Example_1 = require('../Example');
 var Marked = require('marked');
 Marked.setOptions({
     renderer: new Marked.Renderer(),
@@ -15,9 +16,6 @@ var Data = (function () {
     function Data(root) {
         this.root = root;
     }
-    Data.prototype.exampleTemplate = function (name) {
-        return "<iframe class='hologram-styleguide__item-example' src='./" + name + "-example.html' frameborder='0' scrolling='no' onload='resizeIframe(this)'></iframe>";
-    };
     Data.prototype.extractContent = function (s) {
         try {
             return s
@@ -29,37 +27,9 @@ var Data = (function () {
             return [];
         }
     };
-    Data.prototype.extractExample = function (s) {
-        var regex = /<example>[^*]+([^*]+)<\/example>/;
-        if (s.match(regex)) {
-            var temp = s.match(regex)[0].split('\n');
-            temp.splice(0, 1);
-            temp.pop();
-            return temp
-                .map(function (x) { return x.trim(); })
-                .join('');
-        }
-        else {
-            return '';
-        }
-    };
-    Data.prototype.insertExample = function (s, name) {
-        var regex = /<example>[^*]+([^*]+)<\/example>/;
-        if (s.match(regex)) {
-            var temp = s.match(regex)[0].split('\n');
-            temp.splice(0, 1);
-            temp.pop();
-            var example = temp
-                .map(function (x) { return x.trim(); })
-                .join('');
-            return s.replace(regex, this.exampleTemplate(name));
-        }
-        else {
-            return s;
-        }
-    };
     Data.prototype.get = function (directories, ext) {
         var _this = this;
+        var _example = new Example_1.Example();
         var data = [];
         directories.map(function (directory) {
             fs.readdirSync(_this.root + directory).map(function (file) {
@@ -72,8 +42,8 @@ var Data = (function () {
                             .map(function (x, index) { return index === 0 || index === content_1.length ? '' : x; })
                             .join('\n');
                         currentFile.name = name_1.charAt(0) === '_' ? name_1.substring(1) : name_1;
-                        currentFile.content = Marked(_this.insertExample(formattedContent, name_1));
-                        currentFile.example = _this.extractExample(formattedContent);
+                        currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
+                        currentFile.example = _example.extractExample(formattedContent);
                         data.push(currentFile);
                     }
                 }

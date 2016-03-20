@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import {Example} from '../Example';
 
 const Marked = require('marked');
 
@@ -20,10 +21,6 @@ export class Data {
         this.root = root;
     }
 
-    exampleTemplate(name: string): string {
-        return `<iframe class='hologram-styleguide__item-example' src='./${name}-example.html' frameborder='0' scrolling='no' onload='resizeIframe(this)'></iframe>`;
-    }
-
     extractContent(s: string): Array<string> {
         try {
             return s
@@ -35,43 +32,8 @@ export class Data {
         }
     }
 
-    extractExample(s: string): string {
-        let regex: RegExp = /<example>[^*]+([^*]+)<\/example>/;
-
-        if (s.match(regex)) {
-            let temp: Array<string> = s.match(regex)[0].split('\n');
-
-            temp.splice(0, 1);
-            temp.pop();
-
-            return temp
-                .map(x => x.trim())
-                .join('');
-        } else {
-            return '';
-        }
-    }
-
-    insertExample(s: string, name: string): string {
-        let regex: RegExp = /<example>[^*]+([^*]+)<\/example>/;
-
-        if (s.match(regex)) {
-            let temp: Array<string> = s.match(regex)[0].split('\n');
-
-            temp.splice(0, 1);
-            temp.pop();
-
-            let example: string = temp
-                .map(x => x.trim())
-                .join('');
-
-            return s.replace(regex, this.exampleTemplate(name));
-        } else {
-            return s;
-        }
-    }
-
     get(directories: Array<string>, ext: string): Array<string> {
+        let _example: Example = new Example();
         let data: Array<string> = [];
 
         directories.map(directory => {
@@ -89,8 +51,8 @@ export class Data {
                             .join('\n');
 
                         currentFile.name = name.charAt(0) === '_' ? name.substring(1) : name;
-                        currentFile.content = Marked(this.insertExample(formattedContent, name));
-                        currentFile.example = this.extractExample(formattedContent);
+                        currentFile.content = Marked(_example.insertExample(formattedContent, name));
+                        currentFile.example = _example.extractExample(formattedContent);
 
                         data.push(currentFile);
                     }
