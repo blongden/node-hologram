@@ -1,13 +1,13 @@
 // Type definitions for Node.js v4.x
 // Project: http://nodejs.org/
-// Definitions by: Microsoft TypeScript <http://typescriptlang.org>, DefinitelyTyped <https://github.com/borisyankov/DefinitelyTyped>
-// Definitions: https://github.com/borisyankov/DefinitelyTyped
+// Definitions by: Microsoft TypeScript <http://typescriptlang.org>, DefinitelyTyped <https://github.com/DefinitelyTyped/DefinitelyTyped>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 /************************************************
- *                                               *
- *               Node.js v4.x API                *
- *                                               *
- ************************************************/
+*                                               *
+*               Node.js v4.x API                *
+*                                               *
+************************************************/
 
 interface Error {
     stack?: string;
@@ -23,10 +23,10 @@ interface SetConstructor {}
 interface WeakSetConstructor {}
 
 /************************************************
- *                                               *
- *                   GLOBAL                      *
- *                                               *
- ************************************************/
+*                                               *
+*                   GLOBAL                      *
+*                                               *
+************************************************/
 declare var process: NodeJS.Process;
 declare var global: NodeJS.Global;
 
@@ -161,11 +161,11 @@ declare var Buffer: {
 };
 
 /************************************************
- *                                               *
- *               GLOBAL INTERFACES               *
- *                                               *
- ************************************************/
-declare module NodeJS {
+*                                               *
+*               GLOBAL INTERFACES               *
+*                                               *
+************************************************/
+declare namespace NodeJS {
     export interface ErrnoException extends Error {
         errno?: number;
         code?: string;
@@ -433,10 +433,10 @@ interface NodeBuffer {
 }
 
 /************************************************
- *                                               *
- *                   MODULES                     *
- *                                               *
- ************************************************/
+*                                               *
+*                   MODULES                     *
+*                                               *
+************************************************/
 declare module "buffer" {
     export var INSPECT_MAX_BYTES: number;
     var BuffType: typeof Buffer;
@@ -1660,33 +1660,33 @@ declare module "path" {
     export function format(pathObject: ParsedPath): string;
 
     export module posix {
-        export function normalize(p: string): string;
-        export function join(...paths: any[]): string;
-        export function resolve(...pathSegments: any[]): string;
-        export function isAbsolute(p: string): boolean;
-        export function relative(from: string, to: string): string;
-        export function dirname(p: string): string;
-        export function basename(p: string, ext?: string): string;
-        export function extname(p: string): string;
-        export var sep: string;
-        export var delimiter: string;
-        export function parse(p: string): ParsedPath;
-        export function format(pP: ParsedPath): string;
+      export function normalize(p: string): string;
+      export function join(...paths: any[]): string;
+      export function resolve(...pathSegments: any[]): string;
+      export function isAbsolute(p: string): boolean;
+      export function relative(from: string, to: string): string;
+      export function dirname(p: string): string;
+      export function basename(p: string, ext?: string): string;
+      export function extname(p: string): string;
+      export var sep: string;
+      export var delimiter: string;
+      export function parse(p: string): ParsedPath;
+      export function format(pP: ParsedPath): string;
     }
 
     export module win32 {
-        export function normalize(p: string): string;
-        export function join(...paths: any[]): string;
-        export function resolve(...pathSegments: any[]): string;
-        export function isAbsolute(p: string): boolean;
-        export function relative(from: string, to: string): string;
-        export function dirname(p: string): string;
-        export function basename(p: string, ext?: string): string;
-        export function extname(p: string): string;
-        export var sep: string;
-        export var delimiter: string;
-        export function parse(p: string): ParsedPath;
-        export function format(pP: ParsedPath): string;
+      export function normalize(p: string): string;
+      export function join(...paths: any[]): string;
+      export function resolve(...pathSegments: any[]): string;
+      export function isAbsolute(p: string): boolean;
+      export function relative(from: string, to: string): string;
+      export function dirname(p: string): string;
+      export function basename(p: string, ext?: string): string;
+      export function extname(p: string): string;
+      export var sep: string;
+      export var delimiter: string;
+      export function parse(p: string): ParsedPath;
+      export function format(pP: ParsedPath): string;
     }
 }
 
@@ -2006,7 +2006,7 @@ declare module "util" {
 
 declare module "assert" {
     function internal (value: any, message?: string): void;
-    module internal {
+    namespace internal {
         export class AssertionError implements Error {
             name: string;
             message: string;
@@ -2016,7 +2016,7 @@ declare module "assert" {
             generatedMessage: boolean;
 
             constructor(options?: {message?: string; actual?: any; expected?: any;
-                operator?: string; stackStartFunction?: Function});
+                                  operator?: string; stackStartFunction?: Function});
         }
 
         export function fail(actual?: any, expected?: any, message?: string, operator?: string): void;

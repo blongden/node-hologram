@@ -1,12 +1,10 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "outFile": "./hologram/Main.js",
-    "moduleResolution": "node",
-    "sourceMap": true
-  },
-  "exclude": [
-    "node_modules",
-    "typings"
-  ]
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "commonjs",
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
