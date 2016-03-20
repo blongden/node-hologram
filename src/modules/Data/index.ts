@@ -43,18 +43,20 @@ export class Data {
                     let content: Array<string> = this.extractContent(
                         fs.readFileSync(`${this.root + directory}/${file}`, 'utf8'));
 
-                    if (content[0].match(/doc/)) {
-                        let currentFile: any = {};
-                        let name: string = file.split('.')[0];
-                        let formattedContent: string = content
-                            .map((x, index) => index === 0 || index === content.length ? '' : x)
-                            .join('\n');
+                    if (content.length) {
+                        if (content[0].match(/doc/)) {
+                            let currentFile: any = {};
+                            let name: string = file.split('.')[0];
+                            let formattedContent: string = content
+                                .map((x, index) => index === 0 || index === content.length ? '' : x)
+                                .join('\n');
 
-                        currentFile.name = name.charAt(0) === '_' ? name.substring(1) : name;
-                        currentFile.content = Marked(_example.insertExample(formattedContent, name));
-                        currentFile.example = _example.extractExample(formattedContent);
+                            currentFile.name = name.charAt(0) === '_' ? name.substring(1) : name;
+                            currentFile.content = Marked(_example.insertExample(formattedContent, name));
+                            currentFile.example = _example.extractExample(formattedContent);
 
-                        data.push(currentFile);
+                            data.push(currentFile);
+                        }
                     }
                 }
             });

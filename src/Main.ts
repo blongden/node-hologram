@@ -35,7 +35,7 @@ class Main implements Options {
         this.data.colors = this.colors;
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
-        this.data.customStylesheet = this.customStylesheet;
+        this.data.hologramStylesheet = this.customStylesheet;
     }
 
     reset(options: any): void {
@@ -48,7 +48,7 @@ class Main implements Options {
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.scripts = options.scripts || '';
-        this.customStylesheet = options.customStylesheet || `${__dirname}/styles/main.css`;
+        this.customStylesheet = options.customStylesheet || fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
     }
 
     init(): void {
@@ -59,17 +59,25 @@ class Main implements Options {
 
 
         if (this.styles) {
+            let viewData: any = this.data;
             this.data.styles = _data.get(this.styles.dir, this.ext.styles);
             this.data.styles
                 .filter(x => x.example)
-                .map(x => _view.create(x.name, x, exampleLayout));
+                .map(x => {
+                viewData.example = x.example;
+                _view.create(x.name, viewData, exampleLayout);
+            });
         }
 
         if (this.scripts) {
+            let viewData: any = this.data;
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
                 .filter(x => x.example)
-                .map(x => _view.create(x.name, x, exampleLayout));
+                .map(x => {
+                viewData.example = x.example;
+                _view.create(x.name, viewData, exampleLayout);
+            });
         }
 
         if (this.styles || this.scripts) {

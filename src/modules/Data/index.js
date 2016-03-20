@@ -35,16 +35,18 @@ var Data = (function () {
             fs.readdirSync(_this.root + directory).map(function (file) {
                 if (ext === file.split('.').pop()) {
                     var content_1 = _this.extractContent(fs.readFileSync((_this.root + directory) + "/" + file, 'utf8'));
-                    if (content_1[0].match(/doc/)) {
-                        var currentFile = {};
-                        var name_1 = file.split('.')[0];
-                        var formattedContent = content_1
-                            .map(function (x, index) { return index === 0 || index === content_1.length ? '' : x; })
-                            .join('\n');
-                        currentFile.name = name_1.charAt(0) === '_' ? name_1.substring(1) : name_1;
-                        currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
-                        currentFile.example = _example.extractExample(formattedContent);
-                        data.push(currentFile);
+                    if (content_1.length) {
+                        if (content_1[0].match(/doc/)) {
+                            var currentFile = {};
+                            var name_1 = file.split('.')[0];
+                            var formattedContent = content_1
+                                .map(function (x, index) { return index === 0 || index === content_1.length ? '' : x; })
+                                .join('\n');
+                            currentFile.name = name_1.charAt(0) === '_' ? name_1.substring(1) : name_1;
+                            currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
+                            currentFile.example = _example.extractExample(formattedContent);
+                            data.push(currentFile);
+                        }
                     }
                 }
             });
