@@ -59,14 +59,10 @@ class Main implements Options {
 
 
         if (this.styles) {
-            let viewData: any = this.data;
             this.data.styles = _data.get(this.styles.dir, this.ext.styles);
             this.data.styles
                 .filter(x => x.example)
-                .map(x => {
-                viewData.example = x.example;
-                _view.create(x.name, viewData, exampleLayout);
-            });
+                .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
         }
 
         if (this.scripts) {
@@ -74,10 +70,7 @@ class Main implements Options {
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
                 .filter(x => x.example)
-                .map(x => {
-                viewData.example = x.example;
-                _view.create(x.name, viewData, exampleLayout);
-            });
+                .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
         }
 
         if (this.styles || this.scripts) {

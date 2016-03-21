@@ -1,0 +1,108 @@
+$tablet: 769px;
+
+.hologram {
+    background-color: #f7f7f9;
+    padding: 0 20px;
+
+    @media only screen and (min-width: $tablet) {
+        align-items: flex-start;
+        display: flex;
+        justify-content: center;
+    }
+
+    &-sideNav {
+        @media only screen and (min-width: $tablet) {
+            flex: 15%;
+        }
+
+        &__list {
+            list-style: none;
+            padding: 0;
+
+            @media only screen and (min-width: $tablet) {
+                position: fixed;
+                top: 0;
+            }
+        }
+
+        &__list-item {}
+
+        &__list-title {}
+
+        &__list-link {
+            color: #2f6f9f;
+            text-decoration: none;
+            text-transform: capitalize;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &-styleguide {
+        @media only screen and (min-width: $tablet) {
+            flex: 85%;
+        }
+
+        &__title {
+            border-bottom: 1px solid #e1e1e8;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+        }
+
+        &__section {}
+
+        &__section-title {
+            border-bottom: 1px solid #e1e1e8;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+        }
+
+        &__item {
+            background: #fff;
+            border: 1px solid #e1e1e8;
+            padding: 1rem;
+        }
+
+        &__item-content {}
+
+        &__color-pallette {
+            @media only screen and (min-width: $tablet) {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        &__color-pallette-item {
+            width: 100%;
+
+            @media only screen and (min-width: $tablet) {
+                max-width: 25%;
+            }
+        }
+
+        &__color-pallette-item-swatch {
+            @extend .card-content;
+            height: 20px;
+        }
+
+        &__color-pallette-item-text {
+            @extend .media-content;
+        }
+    }
+}
+
+pre {
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    white-space: pre-wrap;
+}
+
+code {
+    color: #2f6f9f;
+    font-family: monospace;
+}
