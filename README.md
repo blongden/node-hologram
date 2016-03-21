@@ -113,7 +113,7 @@ Compatible with `less`, `css`, `ts`, `jsx`.
 
 ```javascript
 ext: {
-    styles: 'scss', 
+    styles: 'scss',
     scripts: 'js'
 }
 ```
@@ -176,7 +176,7 @@ const gulp = require('gulp');
 const options = {
     root: __dirname,
     ext: {
-        styles: 'scss', 
+        styles: 'scss',
         scripts: 'js'
     },
     dest: `/path/to/dest`,

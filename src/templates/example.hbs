@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {{#if app.title}}{{app.title}} | {{/if}}Hologram
+        </title>
+        <link rel="stylesheet" type="text/css" href="{{app.stylesheet}}">
+    </head>
+
+    <body>
+        {{{data.example}}}
+        {{#if app.script}}
+            <script type="text/javascript" src="{{app.script}}"></script>
+        {{/if}}
+    </body>
+
+</html>

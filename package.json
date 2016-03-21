@@ -1,9 +1,10 @@
 {
   "name": "node-hologram",
   "version": "0.1.2-pre",
-  "description": "A node clone of Hologram, aims to provide the same features whilst making accessible to javascript apps.",
+  "description": "Generates styleguide from markdown documentation",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc -p src -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "BrianDGLS",
@@ -14,6 +15,7 @@
   },
   "keywords": [
     "node",
+    "styleguide",
     "hologram"
   ],
   "bugs": {

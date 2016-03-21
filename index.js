@@ -1,4 +1,3 @@
 'use strict';
 
-module.exports = options =>
-    require('./hologram')(options);
+module.exports = options => require('./src/Main')(options);

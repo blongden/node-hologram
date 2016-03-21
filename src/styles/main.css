@@ -1,0 +1,62 @@
+.hologram {
+  background-color: #f7f7f9;
+  padding: 0 20px; }
+  @media only screen and (min-width: 769px) {
+    .hologram {
+      align-items: flex-start;
+      display: flex;
+      justify-content: center; } }
+  @media only screen and (min-width: 769px) {
+    .hologram-sideNav {
+      flex: 15%; } }
+  .hologram-sideNav__list {
+    list-style: none;
+    padding: 0; }
+    @media only screen and (min-width: 769px) {
+      .hologram-sideNav__list {
+        position: fixed;
+        top: 0; } }
+  .hologram-sideNav__list-link {
+    color: #2f6f9f;
+    text-decoration: none;
+    text-transform: capitalize; }
+    .hologram-sideNav__list-link:hover {
+      text-decoration: underline; }
+  @media only screen and (min-width: 769px) {
+    .hologram-styleguide {
+      flex: 85%; } }
+  .hologram-styleguide__title {
+    border-bottom: 1px solid #e1e1e8;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem; }
+  .hologram-styleguide__section-title {
+    border-bottom: 1px solid #e1e1e8;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem; }
+  .hologram-styleguide__item {
+    background: #fff;
+    border: 1px solid #e1e1e8;
+    padding: 1rem; }
+  @media only screen and (min-width: 769px) {
+    .hologram-styleguide__color-pallette {
+      align-items: center;
+      display: flex;
+      justify-content: space-between; } }
+  .hologram-styleguide__color-pallette-item {
+    width: 100%; }
+    @media only screen and (min-width: 769px) {
+      .hologram-styleguide__color-pallette-item {
+        max-width: 25%; } }
+  .hologram-styleguide__color-pallette-item-swatch {
+    height: 20px; }
+
+pre {
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  white-space: pre-wrap; }
+
+code {
+  color: #2f6f9f;
+  font-family: monospace; }
