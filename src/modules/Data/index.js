@@ -42,7 +42,10 @@ var Data = (function () {
                             var formattedContent = content_1
                                 .map(function (x, index) { return index === 0 || index === content_1.length ? '' : x; })
                                 .join('\n');
-                            currentFile.name = name_1.charAt(0) === '_' ? name_1.substring(1) : name_1;
+                            if (name_1.charAt(0) === '_') {
+                                name_1 = name_1.substring(1);
+                            }
+                            currentFile.name = name_1;
                             currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
                             currentFile.example = _example.extractExample(formattedContent);
                             data.push(currentFile);

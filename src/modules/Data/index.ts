@@ -51,7 +51,11 @@ export class Data {
                                 .map((x, index) => index === 0 || index === content.length ? '' : x)
                                 .join('\n');
 
-                            currentFile.name = name.charAt(0) === '_' ? name.substring(1) : name;
+                            if (name.charAt(0) === '_') {
+                                name = name.substring(1);
+                            }
+
+                            currentFile.name = name;
                             currentFile.content = Marked(_example.insertExample(formattedContent, name));
                             currentFile.example = _example.extractExample(formattedContent);
 
