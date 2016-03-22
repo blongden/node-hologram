@@ -1,5 +1,4 @@
 /// <reference path="../libs/node.d.ts" />
-"use strict";
 var fs = require('fs');
 var View_1 = require('./modules/View');
 var Data_1 = require('./modules/Data');
@@ -19,7 +18,10 @@ var Main = (function () {
         this.dest = options.dest;
         this.styles = options.styles;
         // optional
-        this.ext = options.ext || '';
+        this.ext = options.ext || {
+            styles: 'scss',
+            scripts: 'js'
+        };
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.scripts = options.scripts || '';
@@ -53,6 +55,6 @@ var Main = (function () {
         }
     };
     return Main;
-}());
+})();
 module.exports = function (_) { return new Main(_); };
 //# sourceMappingURL=Main.js.map

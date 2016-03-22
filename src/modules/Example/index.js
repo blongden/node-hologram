@@ -1,4 +1,3 @@
-"use strict";
 var Example = (function () {
     function Example() {
     }
@@ -35,6 +34,6 @@ var Example = (function () {
         }
     };
     return Example;
-}());
+})();
 exports.Example = Example;
 //# sourceMappingURL=index.js.map

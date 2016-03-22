@@ -44,7 +44,10 @@ class Main implements Options {
         this.styles = options.styles;
 
         // optional
-        this.ext = options.ext || '';
+        this.ext = options.ext || {
+            styles: 'scss',
+            scripts: 'js'
+        };
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.scripts = options.scripts || '';

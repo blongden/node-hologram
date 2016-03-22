@@ -1,4 +1,3 @@
-"use strict";
 var fs = require('fs');
 var Example_1 = require('../Example');
 var Marked = require('marked');
@@ -20,7 +19,7 @@ var Data = (function () {
         try {
             return s
                 .match(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//)[0]
-                .replace(/([\/\*][*\/])/g, '')
+                .replace(/\/\*(.*?)\\*\//g, '')
                 .split('\n');
         }
         catch (e) {
@@ -34,14 +33,14 @@ var Data = (function () {
         directories.map(function (directory) {
             fs.readdirSync(_this.root + directory).map(function (file) {
                 if (ext === file.split('.').pop()) {
-                    var content_1 = _this.extractContent(fs.readFileSync((_this.root + directory) + "/" + file, 'utf8'));
-                    if (content_1.length) {
-                        if (content_1[0].match(/doc/)) {
+                    var content = _this.extractContent(fs.readFileSync((_this.root + directory) + "/" + file, 'utf8'));
+                    if (content.length) {
+                        if (content[0].match(/doc/)) {
+                            content.pop();
+                            content.splice(0, 1);
                             var currentFile = {};
                             var name_1 = file.split('.')[0];
-                            var formattedContent = content_1
-                                .map(function (x, index) { return index === 0 || index === content_1.length ? '' : x; })
-                                .join('\n');
+                            var formattedContent = content.join('\n');
                             if (name_1.charAt(0) === '_') {
                                 name_1 = name_1.substring(1);
                             }
@@ -57,6 +56,6 @@ var Data = (function () {
         return data;
     };
     return Data;
-}());
+})();
 exports.Data = Data;
 //# sourceMappingURL=index.js.map
