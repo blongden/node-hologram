@@ -25,7 +25,7 @@ export class Data {
         try {
             return s
                 .match(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//)[0]
-                .replace(/([\/\*][*\/])/g, '')
+                .replace(/\/\*(.*?)\\*\//g, '')
                 .split('\n');
         } catch (e) {
             return [];
@@ -45,11 +45,12 @@ export class Data {
 
                     if (content.length) {
                         if (content[0].match(/doc/)) {
+                            content.pop();
+                            content.splice(0, 1);
+
                             let currentFile: any = {};
                             let name: string = file.split('.')[0];
-                            let formattedContent: string = content
-                                .map((x, index) => index === 0 || index === content.length ? '' : x)
-                                .join('\n');
+                            let formattedContent: string = content.join('\n');
 
                             if (name.charAt(0) === '_') {
                                 name = name.substring(1);
