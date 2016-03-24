@@ -5,28 +5,28 @@ import {View} from './modules/View';
 import {Data} from './modules/Data';
 
 interface Options {
-    root: string;
-    dest: string;
-    styles: any;
-    ext?: any;
-    title?: string;
-    colors?: string;
-    scripts?: any;
-    customStylesheet?: string;
+    root:string;
+    dest:string;
+    styles:any;
+    ext?:any;
+    title?:string;
+    colors?:string;
+    scripts?:any;
+    customStylesheet?:string;
 }
 
 class Main implements Options {
-    ext: any;
-    data: any;
-    styles: any;
-    root: string;
-    dest: string;
-    title: string;
-    colors: string;
-    scripts: any;
-    customStylesheet: string;
+    ext:any;
+    data:any;
+    styles:any;
+    root:string;
+    dest:string;
+    title:string;
+    colors:string;
+    scripts:any;
+    customStylesheet:string;
 
-    constructor(options: any) {
+    constructor(options:any) {
         this.reset(options);
 
         // Data to be passed to view
@@ -35,26 +35,27 @@ class Main implements Options {
         this.data.colors = this.colors;
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
-        this.data.hologramStylesheet = this.customStylesheet;
+        this.data.customStylesheet = this.customStylesheet;
+        this.data.hologramStylesheet = fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
     }
 
-    reset(options: any): void {
+    reset(options:any):void {
         this.root = options.root;
         this.dest = options.dest;
         this.styles = options.styles;
 
         // optional
         this.ext = options.ext || {
-            styles: 'scss',
-            scripts: 'js'
-        };
+                styles: 'scss',
+                scripts: 'js'
+            };
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.scripts = options.scripts || '';
-        this.customStylesheet = options.customStylesheet || fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
+        this.customStylesheet = options.customStylesheet || '';
     }
 
-    init(): void {
+    init():void {
         const _data = new Data(this.root);
         const _view = new View(this.root + this.dest);
         const appLayout = fs.readFileSync(`${__dirname}/templates/layout.hbs`, 'utf8');
@@ -65,15 +66,14 @@ class Main implements Options {
             this.data.styles = _data.get(this.styles.dir, this.ext.styles);
             this.data.styles
                 .filter(x => x.example)
-                .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
+                .map(x => _view.create(x.name, {app: this.data, data: x}, exampleLayout));
         }
 
         if (this.scripts) {
-            let viewData: any = this.data;
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
                 .filter(x => x.example)
-                .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
+                .map(x => _view.create(x.name, {app: this.data, data: x}, exampleLayout));
         }
 
         if (this.styles || this.scripts) {

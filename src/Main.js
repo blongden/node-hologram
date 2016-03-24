@@ -1,4 +1,5 @@
 /// <reference path="../libs/node.d.ts" />
+"use strict";
 var fs = require('fs');
 var View_1 = require('./modules/View');
 var Data_1 = require('./modules/Data');
@@ -11,7 +12,8 @@ var Main = (function () {
         this.data.colors = this.colors;
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
-        this.data.hologramStylesheet = this.customStylesheet;
+        this.data.customStylesheet = this.customStylesheet;
+        this.data.hologramStylesheet = fs.readFileSync(__dirname + "/styles/main.css", 'utf8');
     }
     Main.prototype.reset = function (options) {
         this.root = options.root;
@@ -25,7 +27,7 @@ var Main = (function () {
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.scripts = options.scripts || '';
-        this.customStylesheet = options.customStylesheet || fs.readFileSync(__dirname + "/styles/main.css", 'utf8');
+        this.customStylesheet = options.customStylesheet || '';
     };
     Main.prototype.init = function () {
         var _this = this;
@@ -40,7 +42,6 @@ var Main = (function () {
                 .map(function (x) { return _view.create(x.name, { app: _this.data, data: x }, exampleLayout); });
         }
         if (this.scripts) {
-            var viewData = this.data;
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
                 .filter(function (x) { return x.example; })
@@ -55,6 +56,6 @@ var Main = (function () {
         }
     };
     return Main;
-})();
+}());
 module.exports = function (_) { return new Main(_); };
 //# sourceMappingURL=Main.js.map

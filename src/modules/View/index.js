@@ -1,3 +1,4 @@
+"use strict";
 var fs = require('fs');
 var Mkdirp = require('mkdirp');
 var Handlebars = require('handlebars');
@@ -19,6 +20,6 @@ var View = (function () {
         });
     };
     return View;
-})();
+}());
 exports.View = View;
 //# sourceMappingURL=index.js.map

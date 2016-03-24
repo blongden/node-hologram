@@ -1,3 +1,4 @@
+"use strict";
 var fs = require('fs');
 var Example_1 = require('../Example');
 var Marked = require('marked');
@@ -56,6 +57,6 @@ var Data = (function () {
         return data;
     };
     return Data;
-})();
+}());
 exports.Data = Data;
 //# sourceMappingURL=index.js.map
