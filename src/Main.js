@@ -10,6 +10,7 @@ var Main = (function () {
         this.data = {};
         this.data.title = this.title;
         this.data.colors = this.colors;
+        this.data.fonts = this.fonts;
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
@@ -21,11 +22,12 @@ var Main = (function () {
         this.styles = options.styles;
         // optional
         this.ext = options.ext || {
-            styles: 'scss',
-            scripts: 'js'
-        };
+                styles: 'scss',
+                scripts: 'js'
+            };
         this.title = options.title || '';
         this.colors = options.colors || '';
+        this.fonts = options.fonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
     };
