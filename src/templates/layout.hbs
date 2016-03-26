@@ -18,6 +18,11 @@
     <body class="hologram">
         <div class="hologram-sideNav">
             <ul class="hologram-sideNav__list">
+                {{#if colors}}
+                    <li class="hologram-sideNav__list-item">
+                        <a class="hologram-sideNav__list-link" href="#hologramPalette">Color palette</a>
+                    </li>
+                {{/if}}
                 {{#if styles}}
                     <li class="hologram-sideNav__list-item">
                         <h2 class="hologram-sideNav__list-title">Styles</h2>
@@ -43,7 +48,7 @@
         <div class="hologram-styleguide">
             <h2 class="hologram-styleguide__title">{{title}}</h2>
             {{#if colors}}
-                <div class="hologram-styleguide__section">
+                <div class="hologram-styleguide__section" id="hologramPalette">
                     <div class="hologram-styleguide__color-pallette">
                         {{#each colors}}
                             <div class="hologram-styleguide__color-pallette-item">
