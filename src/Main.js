@@ -10,7 +10,7 @@ var Main = (function () {
         this.data = {};
         this.data.title = this.title;
         this.data.colors = this.colors;
-        this.data.fonts = this.fonts;
+        this.data.webfonts = this.webfonts;
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
@@ -27,7 +27,7 @@ var Main = (function () {
             };
         this.title = options.title || '';
         this.colors = options.colors || '';
-        this.fonts = options.fonts || '';
+        this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
     };
