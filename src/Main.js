@@ -22,9 +22,9 @@ var Main = (function () {
         this.styles = options.styles;
         // optional
         this.ext = options.ext || {
-                styles: 'scss',
-                scripts: 'js'
-            };
+            styles: 'scss',
+            scripts: 'js'
+        };
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.webfonts = options.webfonts || '';
