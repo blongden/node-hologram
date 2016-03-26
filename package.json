@@ -1,6 +1,6 @@
 {
   "name": "node-hologram",
-  "version": "0.2.0-pre",
+  "version": "0.1.4",
   "description": "Generates styleguide from markdown documentation",
   "main": "index.js",
   "scripts": {
