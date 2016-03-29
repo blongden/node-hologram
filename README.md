@@ -139,6 +139,19 @@ colors: {
 }
 ```
 
+__webfonts__ `optional`
+
+The styleguide's webfonts, will be displayed at the top of
+the documentation list and below the title.
+Su
+
+```javascript
+webfonts: {
+    'Roboto': 'https://fonts.googleapis.com/css?family=Roboto',
+    'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans',
+}
+```
+
 __scripts__ `optional`
 
 Information on which folders your scripts are contained in (`dir`).

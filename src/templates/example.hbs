@@ -6,6 +6,12 @@
         <title>
             {{#if app.title}}{{app.title}} | {{/if}}Hologram
         </title>
+
+        {{#if app.webfonts}}
+            {{#each app.webfonts}}
+                <link href='{{{this}}}' rel='stylesheet' type='text/css'>
+            {{/each}}
+        {{/if}}
         <link rel="stylesheet" type="text/css" href="{{app.stylesheet}}">
     </head>
 

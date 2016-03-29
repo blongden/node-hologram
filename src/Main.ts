@@ -11,6 +11,7 @@ interface Options {
     ext?:any;
     title?:string;
     colors?:string;
+    webfonts?:string;
     scripts?:any;
     customStylesheet?:string;
 }
@@ -23,6 +24,7 @@ class Main implements Options {
     dest:string;
     title:string;
     colors:string;
+    webfonts:string;
     scripts:any;
     customStylesheet:string;
 
@@ -33,6 +35,7 @@ class Main implements Options {
         this.data = {};
         this.data.title = this.title;
         this.data.colors = this.colors;
+        this.data.webfonts = this.webfonts;
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
@@ -51,6 +54,7 @@ class Main implements Options {
             };
         this.title = options.title || '';
         this.colors = options.colors || '';
+        this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
     }

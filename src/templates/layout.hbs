@@ -59,6 +59,21 @@
                     </div>
                 </div>
             {{/if}}
+            {{#if webfonts}}
+                <div class="hologram-styleguide__section">
+                    <div class="hologram-styleguide__fonts">
+                        {{#each webfonts}}
+                            <div class="hologram-styleguide__font-item">
+                                <link href='{{this}}' rel='stylesheet' type='text/css'>
+                                <p class="hologram-styleguide__font-item-text">{{@key}}</p>
+                                <p class="hologram-styleguide__font-item-swatch" style="font-family: {{@key}}">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tellus nisl, eleifend eu nunc id, tincidunt aliquam velit. Cras auctor varius dolor, nec feugiat risus ultrices at. Cras in leo nec sapien sagittis aliquet quis at purus. Nulla sagittis a tellus non cursus. Proin in mollis nisl. Duis ac dictum nisi.
+                                </p>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/if}}
             {{#if styles}}
                 <div class="hologram-styleguide__section">
                     <h2 class="hologram-styleguide__section-title">Styles</h2>
