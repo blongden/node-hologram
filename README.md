@@ -143,7 +143,6 @@ __webfonts__ `optional`
 
 The styleguide's webfonts, will be displayed at the top of
 the documentation list and below the title.
-Su
 
 ```javascript
 webfonts: {
