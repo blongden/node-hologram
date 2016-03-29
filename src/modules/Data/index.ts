@@ -15,13 +15,13 @@ Marked.setOptions({
 });
 
 export class Data {
-    root: string;
+    root:string;
 
-    constructor(root: string) {
+    constructor(root:string) {
         this.root = root;
     }
 
-    extractContent(s: string): Array<string> {
+    extractContent(s:string):Array<string> {
         try {
             return s
                 .match(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//)[0]
@@ -32,15 +32,22 @@ export class Data {
         }
     }
 
-    get(directories: Array<string>, ext: string): Array<string> {
-        let _example: Example = new Example();
-        let data: Array<string> = [];
+    getName(name:string):string {
+        let split = name.split('.');
+        split.pop();
+
+        return split.join('-');
+    }
+
+    get(directories:Array<string>, ext:string):Array<string> {
+        let _example:Example = new Example();
+        let data:Array<string> = [];
 
         directories.map(directory => {
             fs.readdirSync(this.root + directory).map(file => {
 
                 if (ext === file.split('.').pop()) {
-                    let content: Array<string> = this.extractContent(
+                    let content:Array<string> = this.extractContent(
                         fs.readFileSync(`${this.root + directory}/${file}`, 'utf8'));
 
                     if (content.length) {
@@ -48,9 +55,9 @@ export class Data {
                             content.pop();
                             content.splice(0, 1);
 
-                            let currentFile: any = {};
-                            let name: string = file.split('.')[0];
-                            let formattedContent: string = content.join('\n');
+                            let currentFile:any = {};
+                            let name:string = this.getName(file);
+                            let formattedContent:string = content.join('\n');
 
                             if (name.charAt(0) === '_') {
                                 name = name.substring(1);

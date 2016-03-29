@@ -27,6 +27,11 @@ var Data = (function () {
             return [];
         }
     };
+    Data.prototype.getName = function (name) {
+        var split = name.split('.');
+        split.pop();
+        return split.join('-');
+    };
     Data.prototype.get = function (directories, ext) {
         var _this = this;
         var _example = new Example_1.Example();
@@ -40,7 +45,7 @@ var Data = (function () {
                             content.pop();
                             content.splice(0, 1);
                             var currentFile = {};
-                            var name_1 = file.split('.')[0];
+                            var name_1 = _this.getName(file);
                             var formattedContent = content.join('\n');
                             if (name_1.charAt(0) === '_') {
                                 name_1 = name_1.substring(1);
