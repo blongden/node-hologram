@@ -100,16 +100,18 @@
             <h3 class="hologram-styleguide__section-title">Styles</h3>
             {{#each styles}}
                 <div class="hologram-styleguide__item" id="{{this.name}}">
-                    <a class="subl" href="subl://open?url=file://{{this.path}}">Open in Sublime</a>
-                    <a class="txmt" href="txmt://open?url=file://{{this.path}}">Open in Textmate</a>
-                    <a class="phpstorm" href="idea://open?url=file://{{this.path}}">Open in PhpStorm</a>
+                    <div class="hologram__ide-links">
+                        <a class="hologram__ide-link--subl" href="subl://open?url=file://{{this.path}}&line=1">Open in Sublime</a>
+                        <a class="hologram__ide-link--txmt" href="txmt://open?url=file://{{this.path}}&line=1&column=1">Open in Textmate</a>
+                        <a class="hologram__ide-link--phpstorm" href="idea://open?url=file://{{this.path}}&line=1">Open in PhpStorm</a>
+                    </div>
                     <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
                 </div>
             {{/each}}
         </div>
     {{/if}}
     {{#if scripts}}
-        <div class="hologram-styleguide__section"  id="hologramScripts">
+        <div class="hologram-styleguide__section" id="hologramScripts">
             <h3 class="hologram-styleguide__section-title">Scripts</h3>
             {{#each scripts}}
                 <div class="hologram-styleguide__item" id="{{this.name}}">
