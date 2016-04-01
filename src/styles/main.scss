@@ -1,108 +1,216 @@
 $tablet: 769px;
 
-.hologram {
-    background-color: #f7f7f9;
-    padding: 0 20px;
+// colors
 
-    @media only screen and (min-width: $tablet) {
-        align-items: flex-start;
-        display: flex;
-        justify-content: center;
-    }
+$color: rgb(51, 51, 51);
+
+$offColor: rgb(240, 240, 240);
+
+$accent: rgb(0, 185, 0);
+
+$lines: rgb(157, 157, 157);
+
+.hologram {
+    color: $color;
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     &-sideNav {
-        @media only screen and (min-width: $tablet) {
-            flex: 15%;
-        }
+        background-color: $offColor;
+        border-right: 1px solid $lines;
 
+        width: 20%;
+        position: fixed;
+        overflow-x: hidden;
+        top: 0;
+        bottom: 0;
+
+        &__wrap {
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;
+            margin-right: -10%;
+            background: linear-gradient($offColor 30%, rgba(255, 255, 255, 0)),
+            linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+            radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .47), rgba(0, 0, 0, 0)),
+            radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .47), rgba(0, 0, 0, 0)) 0 100%;
+            background: linear-gradient($offColor 30%, rgba(255, 255, 255, 0)),
+            linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+            radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .47), rgba(0, 0, 0, 0)),
+            radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.47), rgba(0, 0, 0, 0)) 0 100%;
+            background-repeat: no-repeat;
+            background-color: $offColor;
+            background-size: 90% 40px, 90% 40px, 90% 14px, 90% 14px;
+
+            background-attachment: local, local, scroll, scroll;
+        }
         &__list {
             list-style: none;
             padding: 0;
+            margin: 0;
+            width: calc(100% + 20px);
+        }
 
-            @media only screen and (min-width: $tablet) {
-                position: fixed;
-                top: 0;
+        &__list-item {
+            & > * {
+                padding: 10px calc(10% + 20px) 10px 20px;
+                margin: 0;
             }
         }
 
-        &__list-item {}
-
-        &__list-title {}
-
+        &__list-title {
+            background-color: $color;
+            color: $offColor;
+            border-bottom: 1px solid $lines;
+        }
+        &__list-title,
         &__list-link {
-            color: #2f6f9f;
             text-decoration: none;
-            text-transform: capitalize;
-
+            display: block;
+            transition: all .1s ease;
             &:hover {
-                text-decoration: underline;
+                transition: all .1s ease;
+            }
+        }
+        &__list-link {
+            color: $color;
+            &:hover {
+                background-color: $color;
+                color: $offColor;
             }
         }
     }
 
     &-styleguide {
-        @media only screen and (min-width: $tablet) {
-            flex: 85%;
-        }
+        width: calc(80% - 1px);
+        margin-left: calc(20% + 1px);
 
+        &__section-title,
         &__title {
-            border-bottom: 1px solid #e1e1e8;
-            margin-bottom: 2rem;
-            padding-bottom: 0.5rem;
-        }
-
-        &__section {}
-
-        &__section-title {
-            border-bottom: 1px solid #e1e1e8;
-            margin-bottom: 2rem;
-            padding-bottom: 0.5rem;
-        }
-
-        &__item {
-            background: #fff;
-            border: 1px solid #e1e1e8;
+            border-bottom: 1px solid $lines;
+            margin: 0;
             padding: 1rem;
         }
 
-        &__item-content {}
+        &__item {
+            position: relative;
+            padding: 1rem;
+            background: #fff;
+
+            &:not(:last-child):after {
+                content: '';
+                position: relative;
+                display: block;
+                height: 1px;
+                width: 50%;
+                margin: 1rem auto;
+                background: $lines;
+            }
+        }
+
+        &__item-content {
+        }
 
         &__color-pallette {
-            @media only screen and (min-width: $tablet) {
-                align-items: center;
-                display: flex;
-                justify-content: space-between;
-            }
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 1em;
         }
 
         &__color-pallette-item {
-            width: 100%;
-
-            @media only screen and (min-width: $tablet) {
-                max-width: 25%;
-            }
+            flex-grow: 1;
+            width: 25%;
+            padding: 0 1em;
+            overflow: hidden;
+            margin-bottom: 1em;
         }
 
         &__color-pallette-item-swatch {
-            @extend .card-content;
-            height: 20px;
+            height: 2.5em;
+            width: 2.5em;
+            border: 1px solid #9d9d9d;
+            border-radius: 100%;
+            float: left;
+            margin-right: 10px;
         }
 
         &__color-pallette-item-text {
-            @extend .media-content;
+            overflow: hidden;
+        }
+
+        &__color-pallette-item-val,
+        &__color-pallette-item-name {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        &__font-item {
+            padding: 1em;
+        }
+        &__font-item-text {
+
+        }
+        &__font-item-swatch {
+            padding: 1em;
+            border: 1px solid $lines;
+
+        }
+    }
+    &__ide-links {
+        position: absolute;
+        top: 0;
+        right: 1em;
+        & > * {
+            display: inline-block;
+            height: 32px;
+            width: 32px;
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            border: 0;
+            font: 0/0 a;
+            text-shadow: none;
+            color: transparent;
+        }
+    }
+    &__ide-link {
+        &--txmt {
+            background-image: url("icons/TextMate.png");
+        }
+        &--subl {
+            background-image: url("icons/Sublime.png");
+        }
+        &--phpstorm {
+            background-image: url("icons/PhpStorm.png");
         }
     }
 }
 
 pre {
-    padding: 9px 14px;
+    padding: .5em 1em;
     margin-bottom: 14px;
-    background-color: #f7f7f9;
-    border: 1px solid #e1e1e8;
+    background-color: $offColor;
+    border: 1px solid $lines;
     white-space: pre-wrap;
 }
 
 code {
-    color: #2f6f9f;
-    font-family: monospace;
+    background: $offColor;
+    padding: 0 .5em;
+    line-height: 1.4;
+    display: inline-block;
+}
+
+// styleguide item markdown style
+
+.hologram-styleguide__item {
+    // headings reset
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        font-weight: normal;
+    }
 }
