@@ -10,6 +10,7 @@
 
 /* Hologram's Side Nav */
 .hologram-sideNav {}
+.hologram-sideNav__wrap {}
 .hologram-sideNav__list {}
 .hologram-sideNav__list-item {}
 .hologram-sideNav__list-link {}
@@ -21,6 +22,18 @@
 .hologram-styleguide__section {}
 .hologram-styleguide__section-title {}
 .hologram-styleguide__color-pallette {}
+.hologram-styleguide__color-pallette-item {}
+.hologram-styleguide__color-pallette-item-name {}
+.hologram-styleguide__color-pallette-item-text {}
+.hologram-styleguide__color-pallette-item-val {}
+.hologram-styleguide__color-pallette-item-swatch {}
+.hologram-styleguide__font-item {}
+.hologram-styleguide__font-item-text {}
+.hologram-styleguide__font-item-swatch {}
+.hologram-styleguide__ide-links {}
+.hologram-styleguide__ide-link--txmt {}
+.hologram-styleguide__ide-link--subl {}
+.hologram-styleguide__ide-link--phpstorm {}
 .hologram-styleguide__item {}
 .hologram-styleguide__item-content {}
 
