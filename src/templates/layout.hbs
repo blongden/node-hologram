@@ -100,6 +100,9 @@
             <h3 class="hologram-styleguide__section-title">Styles</h3>
             {{#each styles}}
                 <div class="hologram-styleguide__item" id="{{this.name}}">
+                    <a class="subl" href="subl://open?url=file://{{this.path}}">Open in Sublime</a>
+                    <a class="txmt" href="txmt://open?url=file://{{this.path}}">Open in Textmate</a>
+                    <a class="phpstorm" href="idea://open?url=file://{{this.path}}">Open in PhpStorm</a>
                     <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
                 </div>
             {{/each}}

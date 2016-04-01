@@ -66,6 +66,7 @@ export class Data {
                             currentFile.name = name;
                             currentFile.content = Marked(_example.insertExample(formattedContent, name));
                             currentFile.example = _example.extractExample(formattedContent);
+                            currentFile.path = `${this.root + directory}/${file}`;
 
                             data.push(currentFile);
                         }
