@@ -14,6 +14,7 @@ var Main = (function () {
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
+        this.data.hightLight = this.hightLight;
         this.data.hologramStylesheet = fs.readFileSync(__dirname + "/styles/main.css", 'utf8');
     }
     Main.prototype.reset = function (options) {
@@ -30,6 +31,7 @@ var Main = (function () {
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
+        this.hightLight = options.hightLight || 1;
     };
     Main.prototype.init = function () {
         var _this = this;

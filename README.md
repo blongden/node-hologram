@@ -148,7 +148,7 @@ Su
 ```javascript
 webfonts: {
     'Roboto': 'https://fonts.googleapis.com/css?family=Roboto',
-    'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans',
+    'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans'
 }
 ```
 
@@ -176,6 +176,16 @@ A template stylesheet is provided [here](https://github.com/BrianDGLS/node-holog
 customStylesheet: '/path/to/customStylesheet.css'
 ```
 
+__hightlight__ `optional`
+
+Add [hightlight.js](https://highlightjs.org/) to the style guide.
+This option is enabled by default.
+
+
+```javascript
+hightlightjs: 1
+```
+
 ## Examples
 
 __Gulp__
@@ -200,6 +210,10 @@ const options = {
         green: '#0f0',
         blut: '#00f'
     },
+    webfonts: {
+        'Roboto': 'https://fonts.googleapis.com/css?family=Roboto',
+        'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans',
+    }
     styles: {
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/mycompiledcss.css'
@@ -207,7 +221,8 @@ const options = {
     scripts: {
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/myscript.js'
-    }
+    },
+    hightlight : 0
 };
 
 // Require hologram passing in the desired options
