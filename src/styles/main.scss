@@ -205,6 +205,12 @@ code {
     display: inline-block;
 }
 
+iframe {
+    border: 1px solid $lines;
+    resize: both;
+    overflow: auto;
+}
+
 // styleguide item markdown style
 
 .hologram-styleguide__item {
