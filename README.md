@@ -175,14 +175,45 @@ A template stylesheet is provided [here](https://github.com/BrianDGLS/node-holog
 customStylesheet: '/path/to/customStylesheet.css'
 ```
 
-__hightlight__ `optional`
+__highlight__ `optional`
 
-Add [hightlight.js](https://highlightjs.org/) to the style guide.
+Add [highlight.js](https://highlightjs.org/) to the style guide.
 This option is enabled by default.
 
 
 ```javascript
-hightlightjs: 1
+hightlightjs: true
+```
+
+__idelink__ `optional`
+
+Add support for IDE protocols to open files containing hologram docs.
+
+The generated link will have the following format: 
+`%protocol%://open/?url=file://%file%&line=1`
+
+A general icon is provided for any IDE.
+
+Following IDE are provided with a custom icon
+
+- [Sublime Text](https://www.sublimetext.com/) `sublime : '...'`
+- [Phpstorm](https://www.jetbrains.com/phpstorm/) `phpstorm : '...'`
+- [Textmate](https://macromates.com/) `textmate : '...'` 
+
+You may need to download a plugin for your IDE.
+
+i.e.
+
+- [SublimeText](https://github.com/dhoulb/subl),
+- [PhpStorm](https://github.com/aik099/PhpStormProtocol)
+
+This option is disabled by default.
+
+```javascript
+idelink: {
+    idename : 'protocol',
+    otheridename : 'otherprotocol'
+}
 ```
 
 ## Examples
@@ -221,7 +252,12 @@ const options = {
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/myscript.js'
     },
-    hightlight : 0
+    hightlight : false,
+    idelink : {
+        phpstorm : 'phpstorm',
+        sublime : 'subl'
+        textmate : 'txmt'
+    }
 };
 
 // Require hologram passing in the desired options

@@ -101,11 +101,14 @@
             <h3 class="hologram-styleguide__section-title">Styles</h3>
             {{#each styles}}
                 <div class="hologram-styleguide__item" id="{{this.name}}">
-                    <div class="hologram__ide-links">
-                        <a class="hologram__ide-link--subl" href="subl://open?url=file://{{this.path}}&line=1">Open in Sublime</a>
-                        <a class="hologram__ide-link--txmt" href="txmt://open?url=file://{{this.path}}&line=1&column=1">Open in Textmate</a>
-                        <a class="hologram__ide-link--phpstorm" href="idea://open?url=file://{{this.path}}&line=1">Open in PhpStorm</a>
-                    </div>
+                    {{#if ../idelink}}
+                        <div class="hologram__ide-links">
+                            {{#each ../idelink}}
+                                <a title="Open in {{@key}}" class="hologram__ide-link--{{@key}}" href="{{this}}://open?url=file://{{../path}}&line=1">Open
+                                    in {{@key}}</a>
+                            {{/each}}
+                        </div>
+                    {{/if}}
                     <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
                 </div>
             {{/each}}
