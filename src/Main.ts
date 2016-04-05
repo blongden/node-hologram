@@ -28,7 +28,7 @@ class Main implements Options {
     webfonts:string;
     scripts:any;
     customStylesheet:string;
-    hightLight:number;
+    highlight:boolean;
 
     constructor(options:any) {
         this.reset(options);
@@ -41,7 +41,7 @@ class Main implements Options {
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
-        this.data.hightLight = this.hightLight;
+        this.data.hightLight = this.highlight;
         this.data.hologramStylesheet = fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
     }
 
@@ -60,7 +60,7 @@ class Main implements Options {
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
-        this.hightLight = options.hightLight || 1;
+        this.highlight = options.hightLight || true;
     }
 
     init():void {
