@@ -204,3 +204,6 @@ const hologram = require('node-hologram')(options);
 gulp.task('hologram', () => hologram.init());
 
 ```
+
+## Slack
+[Slack channel/](https://node-hologram.slack.com/)
