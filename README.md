@@ -147,7 +147,7 @@ the documentation list and below the title.
 ```javascript
 webfonts: {
     'Roboto': 'https://fonts.googleapis.com/css?family=Roboto',
-    'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans',
+    'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans'
 }
 ```
 
@@ -175,6 +175,47 @@ A template stylesheet is provided [here](https://github.com/BrianDGLS/node-holog
 customStylesheet: '/path/to/customStylesheet.css'
 ```
 
+__highlight__ `optional`
+
+Add [highlight.js](https://highlightjs.org/) to the style guide.
+This option is enabled by default.
+
+
+```javascript
+hightlightjs: true
+```
+
+__idelink__ `optional`
+
+Add support for IDE protocols to open files containing hologram docs.
+
+The generated link will have the following format: 
+`%protocol%://open/?url=file://%file%&line=1`
+
+A general icon is provided for any IDE.
+
+Following IDE are provided with a custom icon
+
+- [Sublime Text](https://www.sublimetext.com/) `sublime : '...'`
+- [Phpstorm](https://www.jetbrains.com/phpstorm/) `phpstorm : '...'`
+- [Textmate](https://macromates.com/) `textmate : '...'` 
+
+You may need to download a plugin for your IDE.
+
+i.e.
+
+- [SublimeText](https://github.com/dhoulb/subl),
+- [PhpStorm](https://github.com/aik099/PhpStormProtocol)
+
+This option is disabled by default.
+
+```javascript
+idelink: {
+    idename : 'protocol',
+    otheridename : 'otherprotocol'
+}
+```
+
 ## Examples
 
 __Gulp__
@@ -199,6 +240,10 @@ const options = {
         green: '#0f0',
         blut: '#00f'
     },
+    webfonts: {
+        'Roboto': 'https://fonts.googleapis.com/css?family=Roboto',
+        'Open Sans': 'https://fonts.googleapis.com/css?family=Open+Sans',
+    }
     styles: {
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/mycompiledcss.css'
@@ -206,6 +251,12 @@ const options = {
     scripts: {
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/myscript.js'
+    },
+    hightlight : false,
+    idelink : {
+        phpstorm : 'phpstorm',
+        sublime : 'subl'
+        textmate : 'txmt'
     }
 };
 

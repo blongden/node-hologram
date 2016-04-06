@@ -1,105 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>
-            {{#if title}}{{title}} | {{/if}}Hologram
-        </title>
-        {{#if customStylesheet}}
-            <link rel="stylesheet" href="{{customStylesheet}}" media="screen" title="no title" charset="utf-8">
-        {{else}}
-            <style media="screen">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {{#if title}}{{title}} | {{/if}}Hologram
+    </title>
+    {{#if customStylesheet}}
+        <link rel="stylesheet" href="{{customStylesheet}}" media="screen" title="no title" charset="utf-8">
+    {{else}}
+        <style media="screen">
                 {{{hologramStylesheet}}}
-            </style>
-        {{/if}}
-    </head>
+        </style>
+    {{/if}}
+    {{#if highlight}}
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
+    {{/if}}
 
-    <body class="hologram">
-        <div class="hologram-sideNav">
-            <ul class="hologram-sideNav__list">
-                {{#if colors}}
-                    <li class="hologram-sideNav__list-item">
-                        <a class="hologram-sideNav__list-link" href="#hologramPalette">Color palette</a>
-                    </li>
-                {{/if}}
-                {{#if styles}}
-                    <li class="hologram-sideNav__list-item">
-                        <h2 class="hologram-sideNav__list-title">Styles</h2>
-                    </li>
-                    {{#each styles}}
-                        <li class="hologram-sideNav__list-item">
-                            <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
-                        </li>
-                    {{/each}}
-                {{/if}}
-                {{#if scripts}}
-                    <li class="hologram-sideNav__list-item">
-                        <h2 class="hologram-sideNav__list-title">Scripts</h2>
-                    </li>
-                    {{#each scripts}}
-                        <li class="hologram-sideNav__list-item">
-                            <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
-                        </li>
-                    {{/each}}
-                {{/if}}
-            </ul>
-        </div>
-        <div class="hologram-styleguide">
-            <h2 class="hologram-styleguide__title">{{title}}</h2>
+</head>
+
+<body class="hologram">
+<div class="hologram-sideNav">
+    <div class="hologram-sideNav__wrap">
+        <ul class="hologram-sideNav__list">
             {{#if colors}}
-                <div class="hologram-styleguide__section" id="hologramPalette">
-                    <div class="hologram-styleguide__color-pallette">
-                        {{#each colors}}
-                            <div class="hologram-styleguide__color-pallette-item">
-                                <div class="hologram-styleguide__color-pallette-item-swatch" style="background: {{this}}"></div>
-                                <p class="hologram-styleguide__color-pallette-item-text">{{@key}}: {{this}}</p>
-                            </div>
-                        {{/each}}
-                    </div>
-                </div>
+                <li class="hologram-sideNav__list-item">
+                    <a class="hologram-sideNav__list-title" href="#hologramPalette">Color palette</a>
+                </li>
             {{/if}}
             {{#if webfonts}}
-                <div class="hologram-styleguide__section">
-                    <div class="hologram-styleguide__fonts">
-                        {{#each webfonts}}
-                            <div class="hologram-styleguide__font-item">
-                                <link href='{{this}}' rel='stylesheet' type='text/css'>
-                                <p class="hologram-styleguide__font-item-text">{{@key}}</p>
-                                <p class="hologram-styleguide__font-item-swatch" style="font-family: {{@key}}">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tellus nisl, eleifend eu nunc id, tincidunt aliquam velit. Cras auctor varius dolor, nec feugiat risus ultrices at. Cras in leo nec sapien sagittis aliquet quis at purus. Nulla sagittis a tellus non cursus. Proin in mollis nisl. Duis ac dictum nisi.
-                                </p>
-                            </div>
-                        {{/each}}
-                    </div>
-                </div>
+                <li class="hologram-sideNav__list-item">
+                    <a class="hologram-sideNav__list-title" href="#hologramWebfonts">Webfonts</a>
+                </li>
             {{/if}}
             {{#if styles}}
-                <div class="hologram-styleguide__section">
-                    <h2 class="hologram-styleguide__section-title">Styles</h2>
-                    {{#each styles}}
-                        <div class="hologram-styleguide__item" id="{{this.name}}">
-                            <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
-                        </div>
-                    {{/each}}
-                </div>
+                <li class="hologram-sideNav__list-item">
+                    <a class="hologram-sideNav__list-title" href="#hologramStyles">Styles</a>
+                </li>
+                {{#each styles}}
+                    <li class="hologram-sideNav__list-item">
+                        <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
+                    </li>
+                {{/each}}
             {{/if}}
             {{#if scripts}}
-                <div class="hologram-styleguide__section">
-                    <h2 class="hologram-styleguide__section-title">Scripts</h2>
-                    {{#each scripts}}
-                        <div class="hologram-styleguide__item" id="{{this.name}}">
-                            <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
-                        </div>
-                    {{/each}}
-                </div>
+                <li class="hologram-sideNav__list-item">
+                    <a class="hologram-sideNav__list-title" href="#hologramScripts">Scripts</a>
+                </li>
+                {{#each scripts}}
+                    <li class="hologram-sideNav__list-item">
+                        <a class="hologram-sideNav__list-link" href="#{{this.name}}">{{this.name}}</a>
+                    </li>
+                {{/each}}
             {{/if}}
+        </ul>
+    </div>
+</div>
+<div class="hologram-styleguide">
+
+    <h2 class="hologram-styleguide__title">{{title}}</h2>
+    {{#if colors}}
+        <div class="hologram-styleguide__section" id="hologramPalette">
+            <h3 class="hologram-styleguide__section-title">Color Palette</h3>
+            <div class="hologram-styleguide__color-pallette">
+                {{#each colors}}
+                    <div class="hologram-styleguide__color-pallette-item">
+                        <div class="hologram-styleguide__color-pallette-item-swatch"
+                             style="background: {{this}}">
+                        </div>
+                        <div class="hologram-styleguide__color-pallette-item-text">
+                            <span class="hologram-styleguide__color-pallette-item-name">{{@key}}</span>
+                            <span class="hologram-styleguide__color-pallette-item-val">{{this}}</span>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
         </div>
-        <script language="javascript" type="text/javascript">
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-        }
-        </script>
-    </body>
+    {{/if}}
+    {{#if webfonts}}
+        <div class="hologram-styleguide__section" id="hologramWebfonts">
+            <h3 class="hologram-styleguide__section-title">Webfonts</h3>
+            <div class="hologram-styleguide__fonts">
+                {{#each webfonts}}
+                    <div class="hologram-styleguide__font-item">
+                        <link href='{{this}}' rel='stylesheet' type='text/css'>
+                        <p class="hologram-styleguide__font-item-text">{{@key}}</p>
+                        <p class="hologram-styleguide__font-item-swatch" style="font-family: {{@key}}">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tellus nisl, eleifend eu
+                            nunc id, tincidunt aliquam velit. Cras auctor varius dolor, nec feugiat risus ultrices
+                            at. Cras in leo nec sapien sagittis aliquet quis at purus. Nulla sagittis a tellus non
+                            cursus. Proin in mollis nisl. Duis ac dictum nisi.
+                        </p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+    {{#if styles}}
+        <div class="hologram-styleguide__section" id="hologramStyles">
+            <h3 class="hologram-styleguide__section-title">Styles</h3>
+            {{#each styles}}
+                <div class="hologram-styleguide__item" id="{{this.name}}">
+                    {{#if ../idelink}}
+                        <div class="hologram__ide-links">
+                            {{#each ../idelink}}
+                                <a title="Open in {{@key}}" class="hologram__ide-link--{{@key}}" href="{{this}}://open?url=file://{{../path}}&line=1">Open
+                                    in {{@key}}</a>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
+    {{#if scripts}}
+        <div class="hologram-styleguide__section" id="hologramScripts">
+            <h3 class="hologram-styleguide__section-title">Scripts</h3>
+            {{#each scripts}}
+                <div class="hologram-styleguide__item" id="{{this.name}}">
+                    <div class="hologram-styleguide__item-content markdown-body">{{{this.content}}}</div>
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>
+<script language="javascript" type="text/javascript">
+    function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+</script>
+{{#if highlight}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{{/if}}
+</body>
 
 </html>

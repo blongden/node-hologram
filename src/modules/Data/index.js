@@ -53,6 +53,7 @@ var Data = (function () {
                             currentFile.name = name_1;
                             currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
                             currentFile.example = _example.extractExample(formattedContent);
+                            currentFile.path = (_this.root + directory) + "/" + file;
                             data.push(currentFile);
                         }
                     }

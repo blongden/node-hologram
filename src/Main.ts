@@ -14,6 +14,8 @@ interface Options {
     webfonts?:string;
     scripts?:any;
     customStylesheet?:string;
+    hightLight?:number;
+    idelinks?:any;
 }
 
 class Main implements Options {
@@ -27,6 +29,8 @@ class Main implements Options {
     webfonts:string;
     scripts:any;
     customStylesheet:string;
+    highlight:boolean;
+    idelink:any;
 
     constructor(options:any) {
         this.reset(options);
@@ -39,7 +43,9 @@ class Main implements Options {
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
+        this.data.hightLight = this.highlight;
         this.data.hologramStylesheet = fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
+        this.data.idelink = this.idelink;
     }
 
     reset(options:any):void {
@@ -57,6 +63,8 @@ class Main implements Options {
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
+        this.highlight = options.hightLight || true;
+        this.idelink = options.idelink || false;
     }
 
     init():void {

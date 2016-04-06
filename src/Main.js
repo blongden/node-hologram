@@ -14,7 +14,9 @@ var Main = (function () {
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
+        this.data.hightLight = this.highlight;
         this.data.hologramStylesheet = fs.readFileSync(__dirname + "/styles/main.css", 'utf8');
+        this.data.idelink = this.idelink;
     }
     Main.prototype.reset = function (options) {
         this.root = options.root;
@@ -30,6 +32,8 @@ var Main = (function () {
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
+        this.highlight = options.hightLight || true;
+        this.idelink = options.idelink || false;
     };
     Main.prototype.init = function () {
         var _this = this;
