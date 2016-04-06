@@ -182,14 +182,14 @@ This option is enabled by default.
 
 
 ```javascript
-hightlightjs: true
+highlightjs: true
 ```
 
 __idelink__ `optional`
 
 Add support for IDE protocols to open files containing hologram docs.
 
-The generated link will have the following format: 
+The generated link will have the following format:
 `%protocol%://open/?url=file://%file%&line=1`
 
 A general icon is provided for any IDE.
@@ -198,7 +198,7 @@ Following IDE are provided with a custom icon
 
 - [Sublime Text](https://www.sublimetext.com/) `sublime : '...'`
 - [Phpstorm](https://www.jetbrains.com/phpstorm/) `phpstorm : '...'`
-- [Textmate](https://macromates.com/) `textmate : '...'` 
+- [Textmate](https://macromates.com/) `textmate : '...'`
 
 You may need to download a plugin for your IDE.
 
@@ -252,7 +252,7 @@ const options = {
         dir: ['/path/to/dir', '/path/to/other'],
         main: '/path/to/myscript.js'
     },
-    hightlight : false,
+    highlight : false,
     idelink : {
         phpstorm : 'phpstorm',
         sublime : 'subl'

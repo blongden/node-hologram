@@ -14,7 +14,7 @@ interface Options {
     webfonts?:string;
     scripts?:any;
     customStylesheet?:string;
-    hightLight?:number;
+    highlight?:boolean;
     idelinks?:any;
 }
 
@@ -43,7 +43,7 @@ class Main implements Options {
         this.data.script = this.scripts.main;
         this.data.stylesheet = this.styles.main;
         this.data.customStylesheet = this.customStylesheet;
-        this.data.hightLight = this.highlight;
+        this.data.highlight = this.highlight;
         this.data.hologramStylesheet = fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
         this.data.idelink = this.idelink;
     }
@@ -54,16 +54,13 @@ class Main implements Options {
         this.styles = options.styles;
 
         // optional
-        this.ext = options.ext || {
-                styles: 'scss',
-                scripts: 'js'
-            };
+        this.ext = options.ext || { styles: 'scss', scripts: 'js' };
         this.title = options.title || '';
         this.colors = options.colors || '';
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
         this.customStylesheet = options.customStylesheet || '';
-        this.highlight = options.hightLight || true;
+        this.highlight = options.highlight || true;
         this.idelink = options.idelink || false;
     }
 
