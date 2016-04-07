@@ -24,7 +24,7 @@
   "homepage": "https://github.com/BrianDGLS/node-hologram#readme",
   "dependencies": {
     "handlebars": "^4.0.5",
-    "marked": "^0.3.5",
+    "meta-marked": "^0.4.1",
     "mkdirp": "^0.5.1"
   }
 }

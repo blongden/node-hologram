@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import {Example} from '../Example';
 
-const Marked = require('marked');
+const Marked = require('meta-marked');
 
 Marked.setOptions({
     renderer: new Marked.Renderer(),
@@ -58,13 +58,18 @@ export class Data {
                             let currentFile:any = {};
                             let name:string = this.getName(file);
                             let formattedContent:string = content.join('\n');
+                            let markdownData:any;
 
                             if (name.charAt(0) === '_') {
                                 name = name.substring(1);
                             }
 
                             currentFile.name = name;
-                            currentFile.content = Marked(_example.insertExample(formattedContent, name));
+                            
+                            // Data recieved from file
+                            markdownData = Marked(_example.insertExample(formattedContent, name));
+                            console.log(markdownData.meta)
+                            currentFile.content = markdownData.html;
                             currentFile.example = _example.extractExample(formattedContent);
                             currentFile.path = `${this.root + directory}/${file}`;
 

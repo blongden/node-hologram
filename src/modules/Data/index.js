@@ -1,7 +1,7 @@
 "use strict";
 var fs = require('fs');
 var Example_1 = require('../Example');
-var Marked = require('marked');
+var Marked = require('meta-marked');
 Marked.setOptions({
     renderer: new Marked.Renderer(),
     gfm: true,
@@ -47,11 +47,15 @@ var Data = (function () {
                             var currentFile = {};
                             var name_1 = _this.getName(file);
                             var formattedContent = content.join('\n');
+                            var markdownData = void 0;
                             if (name_1.charAt(0) === '_') {
                                 name_1 = name_1.substring(1);
                             }
                             currentFile.name = name_1;
-                            currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
+                            // Data recieved from file
+                            markdownData = Marked(_example.insertExample(formattedContent, name_1));
+                            console.log(markdownData.meta);
+                            currentFile.content = markdownData.html;
                             currentFile.example = _example.extractExample(formattedContent);
                             currentFile.path = (_this.root + directory) + "/" + file;
                             data.push(currentFile);

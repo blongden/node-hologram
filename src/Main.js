@@ -1,3 +1,4 @@
+/// <reference path="../libs/node.d.ts" />
 "use strict";
 var fs = require('fs');
 var View_1 = require('./modules/View');
@@ -5,6 +6,7 @@ var Data_1 = require('./modules/Data');
 var Main = (function () {
     function Main(options) {
         this.reset(options);
+        // Data to be passed to view
         this.data = {};
         this.data.title = this.title;
         this.data.colors = this.colors;
@@ -20,6 +22,7 @@ var Main = (function () {
         this.root = options.root;
         this.dest = options.dest;
         this.styles = options.styles;
+        // optional
         this.ext = options.ext || { styles: 'scss', scripts: 'js' };
         this.title = options.title || '';
         this.colors = options.colors || '';
