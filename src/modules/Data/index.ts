@@ -15,13 +15,13 @@ Marked.setOptions({
 });
 
 export class Data {
-    root:string;
+    root: string;
 
-    constructor(root:string) {
+    constructor(root: string) {
         this.root = root;
     }
 
-    extractContent(s:string):Array<string> {
+    extractContent(s: string): Array<string> {
         try {
             return s
                 .match(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//)[0]
@@ -32,22 +32,23 @@ export class Data {
         }
     }
 
-    getName(name:string):string {
+    getName(name: string): string {
         let split = name.split('.');
         split.pop();
 
         return split.join('-');
     }
 
-    get(directories:Array<string>, ext:string):Array<string> {
-        let _example:Example = new Example();
-        let data:Array<string> = [];
-
+    get(directories: Array<string>, ext: string): Array<string> {
+        let _example: Example = new Example();
+        let data: Array<string> = [];
+        let meta: Object = {};
+        
         directories.map(directory => {
             fs.readdirSync(this.root + directory).map(file => {
 
                 if (ext === file.split('.').pop()) {
-                    let content:Array<string> = this.extractContent(
+                    let content: Array<string> = this.extractContent(
                         fs.readFileSync(`${this.root + directory}/${file}`, 'utf8'));
 
                     if (content.length) {
@@ -55,20 +56,21 @@ export class Data {
                             content.pop();
                             content.splice(0, 1);
 
-                            let currentFile:any = {};
-                            let name:string = this.getName(file);
-                            let formattedContent:string = content.join('\n');
-                            let markdownData:any;
+                            let currentFile: any = {};
+                            let name: string = this.getName(file);
+                            let formattedContent: string = content.join('\n');
+                            let markdownData: any;
 
                             if (name.charAt(0) === '_') {
                                 name = name.substring(1);
                             }
 
                             currentFile.name = name;
-                            
+
                             // Data recieved from file
                             markdownData = Marked(_example.insertExample(formattedContent, name));
-                            console.log(markdownData.meta)
+
+                            currentFile.meta = markdownData.meta;
                             currentFile.content = markdownData.html;
                             currentFile.example = _example.extractExample(formattedContent);
                             currentFile.path = `${this.root + directory}/${file}`;

@@ -36,6 +36,7 @@ var Data = (function () {
         var _this = this;
         var _example = new Example_1.Example();
         var data = [];
+        var meta = {};
         directories.map(function (directory) {
             fs.readdirSync(_this.root + directory).map(function (file) {
                 if (ext === file.split('.').pop()) {
@@ -54,7 +55,7 @@ var Data = (function () {
                             currentFile.name = name_1;
                             // Data recieved from file
                             markdownData = Marked(_example.insertExample(formattedContent, name_1));
-                            console.log(markdownData.meta);
+                            currentFile.meta = markdownData.meta;
                             currentFile.content = markdownData.html;
                             currentFile.example = _example.extractExample(formattedContent);
                             currentFile.path = (_this.root + directory) + "/" + file;

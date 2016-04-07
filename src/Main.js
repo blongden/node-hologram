@@ -40,6 +40,19 @@ var Main = (function () {
         var exampleLayout = fs.readFileSync(__dirname + "/templates/example.hbs", 'utf8');
         if (this.styles) {
             this.data.styles = _data.get(this.styles.dir, this.ext.styles);
+            // Meta
+            this.data.styles
+                .filter(function (x) { return x.meta; })
+                .map(function (x) {
+                var meta = x.meta;
+                if (meta.colors) {
+                    Object.keys(meta.colors).forEach(function (k) {
+                        var v = meta.colors[k];
+                        _this.data.colors[k] = v;
+                    });
+                }
+            });
+            // Views
             this.data.styles
                 .filter(function (x) { return x.example; })
                 .map(function (x) { return _view.create(x.name, { app: _this.data, data: x }, exampleLayout); });
