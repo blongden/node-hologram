@@ -7,18 +7,30 @@
             {{#if app.title}}{{app.title}} | {{/if}}Hologram
         </title>
 
+        <!-- Fonts -->
         {{#if app.webfonts}}
             {{#each app.webfonts}}
                 <link href='{{{this}}}' rel='stylesheet' type='text/css'>
             {{/each}}
         {{/if}}
-        <link rel="stylesheet" type="text/css" href="{{app.stylesheet}}">
+        
+        <!-- Stylesheets -->
+        {{#if app.stylesheet}}
+            {{#each app.stylesheet}}
+                <link rel="stylesheet" type="text/css" href="{{this}}">
+            {{/each}}
+        {{/if}}
     </head>
 
     <body>
+        <!-- Content -->
         {{{data.example}}}
+
+        <!-- Scripts -->
         {{#if app.script}}
-            <script type="text/javascript" src="{{app.script}}"></script>
+            {{#each app.script}}
+                <script type="text/javascript" src="{{this}}"></script>
+            {{/each}}
         {{/if}}
     </body>
 

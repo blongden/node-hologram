@@ -29,6 +29,9 @@ __Example Doc__
 
 ```markdown
 /*doc
+---
+colors: {purple: 'purple'}
+---
 
 ## Example
 
@@ -97,12 +100,12 @@ __styles__ `required`
 Information on which folders your stylesheets are contained in (`dir`).
 The specified directories will be recursively searched for files with the correct
 extension (`scss` by default, can be changed using `ext` option),
-as well the path to the compiled stylesheet (`main`).
+as well the paths to your app's stylesheets (`files`).
 
 ```javascript
 styles: {
     dir: ['/path/to/dir', '/path/to/other'],
-    main: '/path/to/mycompiledcss.css'
+    files: ['/path/to/mycompiledcss.css']
 }
 ```
 
@@ -139,6 +142,15 @@ colors: {
 }
 ```
 
+Colors can also be defined within the documentation by adding them as Markdown meta.
+The formatting should be as follows:
+
+```
+---
+colors: {purple: 'purple'}
+---
+```
+
 __webfonts__ `optional`
 
 The styleguide's webfonts, will be displayed at the top of
@@ -156,12 +168,12 @@ __scripts__ `optional`
 Information on which folders your scripts are contained in (`dir`).
 The specified directories will be recursively searched for files with the correct
 extension (`js` by default, can be changed using `ext` option),
-as well the path to the compiled script file (`main`).
+as well the paths to your app's scripts (`files`).
 
 ```javascript
 scripts: {
     dir: ['/path/to/dir', '/path/to/other'],
-    main: '/path/to/myscript.js'
+    files: ['/path/to/myscript.js']
 }
 ```
 
@@ -246,11 +258,11 @@ const options = {
     }
     styles: {
         dir: ['/path/to/dir', '/path/to/other'],
-        main: '/path/to/mycompiledcss.css'
+        files: ['/path/to/mycompiledcss.css']
     },
     scripts: {
         dir: ['/path/to/dir', '/path/to/other'],
-        main: '/path/to/myscript.js'
+        files: ['/path/to/myscript.js']
     },
     highlight : false,
     idelink : {
