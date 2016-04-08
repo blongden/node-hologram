@@ -1,3 +1,4 @@
+/// <reference path="../libs/node.d.ts" />
 "use strict";
 var fs = require('fs');
 var View_1 = require('./modules/View');
@@ -5,6 +6,7 @@ var Data_1 = require('./modules/Data');
 var Main = (function () {
     function Main(options) {
         this.reset(options);
+        // Data to be passed to view
         this.data = {};
         this.data.title = this.title;
         this.data.colors = this.colors;
@@ -20,6 +22,7 @@ var Main = (function () {
         this.root = options.root;
         this.dest = options.dest;
         this.styles = options.styles;
+        // optional
         this.ext = options.ext || { styles: 'scss', scripts: 'js' };
         this.title = options.title || '';
         this.colors = options.colors || '';
@@ -37,14 +40,27 @@ var Main = (function () {
         var exampleLayout = fs.readFileSync(__dirname + "/templates/example.hbs", 'utf8');
         if (this.styles) {
             this.data.styles = _data.get(this.styles.dir, this.ext.styles);
+            // Meta
             this.data.styles
-                .filter(function (x) { return x.example; })
+                .filter(function (x) { return x.meta; })
+                .map(function (x) {
+                var meta = x.meta;
+                if (meta.colors) {
+                    Object.keys(meta.colors).forEach(function (k) {
+                        var v = meta.colors[k];
+                        _this.data.colors[k] = v;
+                    });
+                }
+            });
+            // Views
+            this.data.styles
+                .filter(function (x) { return x.example.length > 1; })
                 .map(function (x) { return _view.create(x.name, { app: _this.data, data: x }, exampleLayout); });
         }
         if (this.scripts) {
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
-                .filter(function (x) { return x.example; })
+                .filter(function (x) { return x.example.length > 1; })
                 .map(function (x) { return _view.create(x.name, { app: _this.data, data: x }, exampleLayout); });
         }
         if (this.styles || this.scripts) {

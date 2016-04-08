@@ -5,34 +5,34 @@ import {View} from './modules/View';
 import {Data} from './modules/Data';
 
 interface Options {
-    root:string;
-    dest:string;
-    styles:any;
-    ext?:any;
-    title?:string;
-    colors?:string;
-    webfonts?:string;
-    scripts?:any;
-    customStylesheet?:string;
-    highlight?:boolean;
-    idelinks?:any;
+    root: string;
+    dest: string;
+    styles: any;
+    ext?: any;
+    title?: string;
+    colors?: string;
+    webfonts?: string;
+    scripts?: any;
+    customStylesheet?: string;
+    highlight?: boolean;
+    idelinks?: any;
 }
 
 class Main implements Options {
-    ext:any;
-    data:any;
-    styles:any;
-    root:string;
-    dest:string;
-    title:string;
-    colors:string;
-    webfonts:string;
-    scripts:any;
-    customStylesheet:string;
-    highlight:boolean;
-    idelink:any;
+    ext: any;
+    data: any;
+    styles: any;
+    root: string;
+    dest: string;
+    title: string;
+    colors: string;
+    webfonts: string;
+    scripts: any;
+    customStylesheet: string;
+    highlight: boolean;
+    idelink: any;
 
-    constructor(options:any) {
+    constructor(options: any) {
         this.reset(options);
 
         // Data to be passed to view
@@ -48,7 +48,7 @@ class Main implements Options {
         this.data.idelink = this.idelink;
     }
 
-    reset(options:any):void {
+    reset(options: any): void {
         this.root = options.root;
         this.dest = options.dest;
         this.styles = options.styles;
@@ -64,7 +64,7 @@ class Main implements Options {
         this.idelink = options.idelink || false;
     }
 
-    init():void {
+    init(): void {
         const _data = new Data(this.root);
         const _view = new View(this.root + this.dest);
         const appLayout = fs.readFileSync(`${__dirname}/templates/layout.hbs`, 'utf8');
@@ -73,16 +73,29 @@ class Main implements Options {
 
         if (this.styles) {
             this.data.styles = _data.get(this.styles.dir, this.ext.styles);
+            // Meta
             this.data.styles
-                .filter(x => x.example)
-                .map(x => _view.create(x.name, {app: this.data, data: x}, exampleLayout));
+                .filter(x => x.meta)
+                .map(x => {
+                    let meta = x.meta;
+                    if (meta.colors) {
+                        Object.keys(meta.colors).forEach(k => {
+                            let v = meta.colors[k];
+                            this.data.colors[k] = v;
+                        });
+                    }
+                });
+            // Views
+            this.data.styles
+                .filter(x => x.example.length > 1)
+                .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
         }
 
         if (this.scripts) {
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
-                .filter(x => x.example)
-                .map(x => _view.create(x.name, {app: this.data, data: x}, exampleLayout));
+                .filter(x => x.example.length > 1)
+                .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
         }
 
         if (this.styles || this.scripts) {

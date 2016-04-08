@@ -11,7 +11,7 @@ export class Example {
 
             temp.splice(0, 1);
             temp.pop();
-            
+
             return temp
                 .map(x => x.trim())
                 .join('');
@@ -32,7 +32,7 @@ export class Example {
             let example: string = temp
                 .map(x => x.trim())
                 .join('');
-               
+
             return s.replace(regex, this.exampleTemplate(name));
         } else {
             return s;

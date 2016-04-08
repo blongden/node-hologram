@@ -1,7 +1,8 @@
 "use strict";
 var fs = require('fs');
 var Example_1 = require('../Example');
-var Marked = require('marked');
+var Search = require('recursive-search');
+var Marked = require('meta-marked');
 Marked.setOptions({
     renderer: new Marked.Renderer(),
     gfm: true,
@@ -36,24 +37,31 @@ var Data = (function () {
         var _this = this;
         var _example = new Example_1.Example();
         var data = [];
+        var meta = {};
         directories.map(function (directory) {
-            fs.readdirSync(_this.root + directory).map(function (file) {
-                if (ext === file.split('.').pop()) {
-                    var content = _this.extractContent(fs.readFileSync((_this.root + directory) + "/" + file, 'utf8'));
+            Search.recursiveSearchSync('*', _this.root + directory)
+                .map(function (file) {
+                var formattedFile = file.split('/').pop();
+                if (ext === formattedFile.split('.').pop()) {
+                    var content = _this.extractContent(fs.readFileSync(file, 'utf8'));
                     if (content.length) {
                         if (content[0].match(/doc/)) {
                             content.pop();
                             content.splice(0, 1);
                             var currentFile = {};
-                            var name_1 = _this.getName(file);
+                            var name_1 = _this.getName(formattedFile);
                             var formattedContent = content.join('\n');
+                            var markdownData = void 0;
                             if (name_1.charAt(0) === '_') {
                                 name_1 = name_1.substring(1);
                             }
                             currentFile.name = name_1;
-                            currentFile.content = Marked(_example.insertExample(formattedContent, name_1));
+                            // Data recieved from Meta-Marked
+                            markdownData = Marked(_example.insertExample(formattedContent, name_1));
+                            currentFile.meta = markdownData.meta;
+                            currentFile.content = markdownData.html;
                             currentFile.example = _example.extractExample(formattedContent);
-                            currentFile.path = (_this.root + directory) + "/" + file;
+                            currentFile.path = file;
                             data.push(currentFile);
                         }
                     }

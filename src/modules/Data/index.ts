@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import {Example} from '../Example';
-
-const Marked = require('marked');
+const Search = require('recursive-search');
+const Marked = require('meta-marked');
 
 Marked.setOptions({
     renderer: new Marked.Renderer(),
@@ -15,13 +15,13 @@ Marked.setOptions({
 });
 
 export class Data {
-    root:string;
+    root: string;
 
-    constructor(root:string) {
+    constructor(root: string) {
         this.root = root;
     }
 
-    extractContent(s:string):Array<string> {
+    extractContent(s: string): Array<string> {
         try {
             return s
                 .match(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//)[0]
@@ -32,47 +32,56 @@ export class Data {
         }
     }
 
-    getName(name:string):string {
+    getName(name: string): string {
         let split = name.split('.');
         split.pop();
 
         return split.join('-');
     }
 
-    get(directories:Array<string>, ext:string):Array<string> {
-        let _example:Example = new Example();
-        let data:Array<string> = [];
+    get(directories: Array<string>, ext: string): Array<string> {
+        let _example: Example = new Example();
+        let data: Array<string> = [];
+        let meta: Object = {};
+
 
         directories.map(directory => {
-            fs.readdirSync(this.root + directory).map(file => {
+            Search.recursiveSearchSync('*', this.root + directory)
+                .map(file => {
+                    let formattedFile: string = file.split('/').pop();
 
-                if (ext === file.split('.').pop()) {
-                    let content:Array<string> = this.extractContent(
-                        fs.readFileSync(`${this.root + directory}/${file}`, 'utf8'));
+                    if (ext === formattedFile.split('.').pop()) {
+                        let content: Array<string> = this.extractContent(fs.readFileSync(file, 'utf8'));
 
-                    if (content.length) {
-                        if (content[0].match(/doc/)) {
-                            content.pop();
-                            content.splice(0, 1);
+                        if (content.length) {
+                            if (content[0].match(/doc/)) {
+                                content.pop();
+                                content.splice(0, 1);
 
-                            let currentFile:any = {};
-                            let name:string = this.getName(file);
-                            let formattedContent:string = content.join('\n');
+                                let currentFile: any = {};
+                                let name: string = this.getName(formattedFile);
+                                let formattedContent: string = content.join('\n');
+                                let markdownData: any;
 
-                            if (name.charAt(0) === '_') {
-                                name = name.substring(1);
+                                if (name.charAt(0) === '_') {
+                                    name = name.substring(1);
+                                }
+
+                                currentFile.name = name;
+
+                                // Data recieved from Meta-Marked
+                                markdownData = Marked(_example.insertExample(formattedContent, name));
+
+                                currentFile.meta = markdownData.meta;
+                                currentFile.content = markdownData.html;
+                                currentFile.example = _example.extractExample(formattedContent);
+                                currentFile.path = file;
+
+                                data.push(currentFile);
                             }
-
-                            currentFile.name = name;
-                            currentFile.content = Marked(_example.insertExample(formattedContent, name));
-                            currentFile.example = _example.extractExample(formattedContent);
-                            currentFile.path = `${this.root + directory}/${file}`;
-
-                            data.push(currentFile);
                         }
                     }
-                }
-            });
+                });
         });
 
         return data;
