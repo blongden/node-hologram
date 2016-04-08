@@ -95,7 +95,7 @@ dest: '/path/to/dest'
 __styles__ `required`
 
 Information on which folders your stylesheets are contained in (`dir`).
-Hologram will scan these folders looking for files with the correct
+The specified directories will be recursively searched for files with the correct
 extension (`scss` by default, can be changed using `ext` option),
 as well the path to the compiled stylesheet (`main`).
 
@@ -154,7 +154,7 @@ webfonts: {
 __scripts__ `optional`
 
 Information on which folders your scripts are contained in (`dir`).
-Hologram will scan these folders looking for files with the correct
+The specified directories will be recursively searched for files with the correct
 extension (`js` by default, can be changed using `ext` option),
 as well the path to the compiled script file (`main`).
 

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import {Example} from '../Example';
-
+const Search = require('recursive-search');
 const Marked = require('meta-marked');
 
 Marked.setOptions({
@@ -43,43 +43,45 @@ export class Data {
         let _example: Example = new Example();
         let data: Array<string> = [];
         let meta: Object = {};
-        
+
+
         directories.map(directory => {
-            fs.readdirSync(this.root + directory).map(file => {
+            Search.recursiveSearchSync('*', this.root + directory)
+                .map(file => {
+                    let formattedFile: string = file.split('/').pop();
 
-                if (ext === file.split('.').pop()) {
-                    let content: Array<string> = this.extractContent(
-                        fs.readFileSync(`${this.root + directory}/${file}`, 'utf8'));
+                    if (ext === formattedFile.split('.').pop()) {
+                        let content: Array<string> = this.extractContent(fs.readFileSync(file, 'utf8'));
 
-                    if (content.length) {
-                        if (content[0].match(/doc/)) {
-                            content.pop();
-                            content.splice(0, 1);
+                        if (content.length) {
+                            if (content[0].match(/doc/)) {
+                                content.pop();
+                                content.splice(0, 1);
 
-                            let currentFile: any = {};
-                            let name: string = this.getName(file);
-                            let formattedContent: string = content.join('\n');
-                            let markdownData: any;
+                                let currentFile: any = {};
+                                let name: string = this.getName(formattedFile);
+                                let formattedContent: string = content.join('\n');
+                                let markdownData: any;
 
-                            if (name.charAt(0) === '_') {
-                                name = name.substring(1);
+                                if (name.charAt(0) === '_') {
+                                    name = name.substring(1);
+                                }
+
+                                currentFile.name = name;
+
+                                // Data recieved from Meta-Marked
+                                markdownData = Marked(_example.insertExample(formattedContent, name));
+
+                                currentFile.meta = markdownData.meta;
+                                currentFile.content = markdownData.html;
+                                currentFile.example = _example.extractExample(formattedContent);
+                                currentFile.path = file;
+
+                                data.push(currentFile);
                             }
-
-                            currentFile.name = name;
-
-                            // Data recieved from file
-                            markdownData = Marked(_example.insertExample(formattedContent, name));
-
-                            currentFile.meta = markdownData.meta;
-                            currentFile.content = markdownData.html;
-                            currentFile.example = _example.extractExample(formattedContent);
-                            currentFile.path = `${this.root + directory}/${file}`;
-
-                            data.push(currentFile);
                         }
                     }
-                }
-            });
+                });
         });
 
         return data;

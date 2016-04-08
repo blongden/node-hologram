@@ -1,7 +1,7 @@
 {
   "name": "node-hologram",
   "version": "0.1.5-pre",
-  "description": "Generates styleguide from markdown documentation",
+  "description": "Generate styleguides from markdown documentation",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc -p src -w",
@@ -25,6 +25,7 @@
   "dependencies": {
     "handlebars": "^4.0.5",
     "meta-marked": "^0.4.1",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "recursive-search": "^1.0.1"
   }
 }
