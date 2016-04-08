@@ -40,8 +40,8 @@ class Main implements Options {
         this.data.title = this.title;
         this.data.colors = this.colors;
         this.data.webfonts = this.webfonts;
-        this.data.script = this.scripts.main;
-        this.data.stylesheet = this.styles.main;
+        this.data.script = this.scripts.files;
+        this.data.stylesheet = this.styles.files;
         this.data.customStylesheet = this.customStylesheet;
         this.data.highlight = this.highlight;
         this.data.hologramStylesheet = fs.readFileSync(`${__dirname}/styles/main.css`, 'utf8');
