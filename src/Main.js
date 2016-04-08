@@ -54,13 +54,13 @@ var Main = (function () {
             });
             // Views
             this.data.styles
-                .filter(function (x) { return x.example; })
+                .filter(function (x) { return x.example.length > 1; })
                 .map(function (x) { return _view.create(x.name, { app: _this.data, data: x }, exampleLayout); });
         }
         if (this.scripts) {
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
-                .filter(function (x) { return x.example; })
+                .filter(function (x) { return x.example.length > 1; })
                 .map(function (x) { return _view.create(x.name, { app: _this.data, data: x }, exampleLayout); });
         }
         if (this.styles || this.scripts) {

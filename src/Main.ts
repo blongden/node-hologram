@@ -87,14 +87,14 @@ class Main implements Options {
                 });
             // Views
             this.data.styles
-                .filter(x => x.example)
+                .filter(x => x.example.length > 1)
                 .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
         }
 
         if (this.scripts) {
             this.data.scripts = _data.get(this.scripts.dir, this.ext.scripts);
             this.data.scripts
-                .filter(x => x.example)
+                .filter(x => x.example.length > 1)
                 .map(x => _view.create(x.name, { app: this.data, data: x }, exampleLayout));
         }
 
