@@ -9,6 +9,7 @@ var Main = (function () {
         // Data to be passed to view
         this.data = {};
         this.data.title = this.title;
+        this.data.description = this.description;
         this.data.colors = this.colors;
         this.data.webfonts = this.webfonts;
         this.data.script = this.scripts.files;
@@ -25,6 +26,7 @@ var Main = (function () {
         // optional
         this.ext = options.ext || { styles: 'scss', scripts: 'js' };
         this.title = options.title || '';
+        this.description = options.description || '';
         this.colors = options.colors || '';
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';

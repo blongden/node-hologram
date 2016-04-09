@@ -214,6 +214,14 @@ A template stylesheet is provided [here](https://github.com/BrianDGLS/node-holog
 customStylesheet: '/path/to/customStylesheet.css'
 ```
 
+__description__ `optional`
+
+Allows you to add a small app description.
+
+```javascript
+description: 'A big client site that needs a styleguide'
+```
+
 __highlight__ `optional`
 
 Add [highlight.js](https://highlightjs.org/) to the style guide.
@@ -273,6 +281,7 @@ const options = {
     },
     dest: '/path/to/dest',
     title: 'My awesome app',
+    description: 'A big client site that needs a styleguide',
     customStylesheet: '/path/to/customStylesheet.css',
     colors: {
         red: '#f00',

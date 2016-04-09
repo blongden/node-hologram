@@ -10,6 +10,7 @@ interface Options {
     styles: any;
     ext?: any;
     title?: string;
+    description?: string;
     colors?: string;
     webfonts?: string;
     scripts?: any;
@@ -25,6 +26,7 @@ class Main implements Options {
     root: string;
     dest: string;
     title: string;
+    description: string;
     colors: string;
     webfonts: string;
     scripts: any;
@@ -38,6 +40,7 @@ class Main implements Options {
         // Data to be passed to view
         this.data = {};
         this.data.title = this.title;
+        this.data.description = this.description;
         this.data.colors = this.colors;
         this.data.webfonts = this.webfonts;
         this.data.script = this.scripts.files;
@@ -56,6 +59,7 @@ class Main implements Options {
         // optional
         this.ext = options.ext || { styles: 'scss', scripts: 'js' };
         this.title = options.title || '';
+        this.description = options.description || '';
         this.colors = options.colors || '';
         this.webfonts = options.webfonts || '';
         this.scripts = options.scripts || '';
