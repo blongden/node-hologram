@@ -31,6 +31,7 @@ __Example Doc__
 /*doc
 ---
 colors: {purple: 'purple'}
+order: 1
 ---
 
 ## Example
@@ -75,6 +76,32 @@ __NB__:
  - Only the first correctly formatted comment will be used. Eg: One doc per file.
  - Only the first `<example>` of each doc will be extracted, Eg: One example per file.
 
+## Meta Data
+
+The below node-hologram features can be set using markdown meta data.
+
+__order__
+
+The order option allows you to specify the index of an item in the styleguide.
+The order starts at 1. So an item given an order of 1 will appear as the first item in the styleguide.
+
+
+```
+---
+order: 1
+---
+```
+
+__colors__
+
+As well as being defined in the options object the styleguide's colors pallette can also be created via markdown.
+Colors should be defined in the markdown as per the example below.
+ 
+```
+---
+colors: {red: '#f00'}
+---
+```
 
 ## Options
 
