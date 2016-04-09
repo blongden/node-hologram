@@ -39,6 +39,14 @@ export class Data {
         return split.join('-');
     }
 
+    setOrder(data: Array<any>): Array<any> {
+        data
+            .filter(x => x.meta.order)
+            .map((x, index) => data.splice(x.meta.order - 1, 0, x));
+
+        return data;
+    }
+
     get(directories: Array<string>, ext: string): Array<string> {
         let _example: Example = new Example();
         let data: Array<string> = [];
@@ -84,6 +92,6 @@ export class Data {
                 });
         });
 
-        return data;
+        return this.setOrder(data);;
     }
 }

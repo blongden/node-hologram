@@ -33,6 +33,12 @@ var Data = (function () {
         split.pop();
         return split.join('-');
     };
+    Data.prototype.setOrder = function (data) {
+        data
+            .filter(function (x) { return x.meta.order; })
+            .map(function (x, index) { return data.splice(x.meta.order - 1, 0, x); });
+        return data;
+    };
     Data.prototype.get = function (directories, ext) {
         var _this = this;
         var _example = new Example_1.Example();
@@ -68,7 +74,8 @@ var Data = (function () {
                 }
             });
         });
-        return data;
+        return this.setOrder(data);
+        ;
     };
     return Data;
 }());
