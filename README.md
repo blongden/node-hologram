@@ -27,10 +27,10 @@ which will then be used to create a styleguide.
 
 __Example Doc__
 
-```markdown
+```html
 /*doc
 ---
-colors: {purple: 'purple'}
+colors: {red: '#f00'}
 order: 1
 ---
 
