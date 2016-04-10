@@ -34,9 +34,12 @@ var Data = (function () {
         return split.join('-');
     };
     Data.prototype.setOrder = function (data) {
-        data
-            .filter(function (x) { return x.meta.order; })
-            .map(function (x, index) { return data.splice(x.meta.order - 1, 0, x); });
+        var temp = data.filter(function (x) { return x.meta.order; });
+        temp.map(function (x, index) {
+            data.splice(index - 1, 1);
+            data.splice(x.meta.order - 1, 0, x);
+        });
+        console.log(data);
         return data;
     };
     Data.prototype.get = function (directories, ext) {

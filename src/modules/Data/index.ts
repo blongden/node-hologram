@@ -40,9 +40,11 @@ export class Data {
     }
 
     setOrder(data: Array<any>): Array<any> {
-        data
-            .filter(x => x.meta.order)
-            .map((x, index) => data.splice(x.meta.order - 1, 0, x));
+        let temp = data.filter(x => x.meta.order);
+        temp.map((x, index) => {
+            data.splice(index - 1, 1);
+            data.splice(x.meta.order - 1, 0, x)
+        });
 
         return data;
     }
