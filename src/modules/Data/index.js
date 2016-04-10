@@ -13,6 +13,22 @@ Marked.setOptions({
     smartLists: true,
     smartypants: false
 });
+function move(array, value, newIndex) {
+    var oldIndex = array.indexOf(value);
+    if (oldIndex > -1) {
+        if (newIndex < 0) {
+            newIndex = 0;
+        }
+        else if (newIndex >= array.length) {
+            newIndex = array.length;
+        }
+        var arrayClone = array.slice();
+        arrayClone.splice(oldIndex, 1);
+        arrayClone.splice(newIndex, 0, value);
+        return arrayClone;
+    }
+    return array;
+}
 var Data = (function () {
     function Data(root) {
         this.root = root;
@@ -34,10 +50,14 @@ var Data = (function () {
         return split.join('-');
     };
     Data.prototype.setOrder = function (data) {
-        data
-            .filter(function (x) { return x.meta.order; })
-            .map(function (x, index) { return data.splice(x.meta.order - 1, 0, x); });
-        return data;
+        var newData = data;
+        var temp = data
+            .filter(function (x) { return x.meta; })
+            .filter(function (x) { return x.meta.order; });
+        temp.map(function (x, index) {
+            newData = move(newData, x, x.meta.order - 1);
+        });
+        return newData;
     };
     Data.prototype.get = function (directories, ext) {
         var _this = this;
@@ -74,8 +94,15 @@ var Data = (function () {
                 }
             });
         });
-        return this.setOrder(data);
-        ;
+        var order = data
+            .filter(function (x) { return x.meta; })
+            .filter(function (x) { return x.meta.order; });
+        if (order.length >= 1) {
+            return this.setOrder(data);
+        }
+        else {
+            return data;
+        }
     };
     return Data;
 }());
