@@ -14,6 +14,24 @@ Marked.setOptions({
     smartypants: false
 });
 
+function move(array, value, newIndex) {
+    let oldIndex = array.indexOf(value);
+    if (oldIndex > -1) {
+        if (newIndex < 0) {
+            newIndex = 0
+        } else if (newIndex >= array.length) {
+            newIndex = array.length
+        }
+
+        let arrayClone = array.slice();
+        arrayClone.splice(oldIndex, 1);
+        arrayClone.splice(newIndex, 0, value);
+
+        return arrayClone
+    }
+    return array
+}
+
 export class Data {
     root: string;
 
@@ -40,13 +58,16 @@ export class Data {
     }
 
     setOrder(data: Array<any>): Array<any> {
-        let temp = data.filter(x => x.meta.order);
+        let newData: Array<any> = data;
+        let temp: Array<any> = data
+            .filter(x => x.meta)
+            .filter(x => x.meta.order);
+
         temp.map((x, index) => {
-            data.splice(index - 1, 1);
-            data.splice(x.meta.order - 1, 0, x)
+            newData = move(newData, x, x.meta.order - 1);
         });
 
-        return data;
+        return newData;
     }
 
     get(directories: Array<string>, ext: string): Array<string> {
@@ -94,6 +115,14 @@ export class Data {
                 });
         });
 
-        return this.setOrder(data);;
+        let order = data
+            .filter(x => x.meta)
+            .filter(x => x.meta.order);
+
+        if (order.length >= 1) {
+            return this.setOrder(data);
+        } else {
+            return data;
+        }
     }
 }
