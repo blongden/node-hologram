@@ -49,7 +49,7 @@ placed in an iframe.
 
 <example>
     <h2>I will be rendered as HTML</h2>
-<example>
+</example>
 
 
 */
